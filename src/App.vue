@@ -9,9 +9,9 @@
     >
     <v-row justify="center" no-gutters class="pa-6">
       <v-img
-        height="100px"
-        width="220px"
-        :src="require('@/assets/nentwich_logo_white_wip.svg')"
+        height="30px"
+        width="80px"
+        :src="require('@/assets/nentwichVerlag_logos_name_grey_grey.svg')"
       ></v-img>
     </v-row>
       <v-divider></v-divider>
@@ -37,19 +37,19 @@
     >
     <v-container>
       <v-row no-gutters justify="center" align="center">
-        <v-col cols="auto">
+        <v-col cols="1" v-if="$vuetify.breakpoint.mobile">
           <v-app-bar-nav-icon 
             class="primary--text mr-4" 
-            v-if="$vuetify.breakpoint.mobile"
             @click="drawer = !drawer"
           ></v-app-bar-nav-icon>
         </v-col>
-        <v-col cols="auto" md="3" class="secondaryAccent">
+        <v-col cols="11" md="4">
           <router-link class="justify-center" to="/">
             <v-img
-              height="100px"
-              width="210px"
-              :src="require('@/assets/nentwich_logo_wip.svg')"
+              :height="$vuetify.breakpoint.smAndDown ? '10vw' : '10vw'"
+              max-height="60"
+              :width="$vuetify.breakpoint.smAndDown ? '80vw' : '25vw'"
+              :src="require('@/assets/nentwichVerlag_logos_name_green_grey.svg')"
               class="mr-5"
             ></v-img>
           </router-link>
@@ -65,11 +65,22 @@
     </v-app-bar>
 
     <v-main>
-      <v-container
-      >
-        <router-view></router-view>
+      <v-container>
+        <transition name="component-fade" mode="out-in">
+          <v-row no-gutters>
+            <v-col cols="12">
+              <Cart/>
+            </v-col>
+            <v-col cols="12">
+              <router-view></router-view>
+            </v-col>
+          </v-row>
+        </transition>
         <!-- <Footer class="align" /> -->
-        <v-footer fixed width="100%" color="primary">
+        
+      </v-container>
+    </v-main>
+    <v-footer width="100%" color="primary">
           <v-container>
             <v-row>
           <v-col cols="4">
@@ -86,24 +97,23 @@
             cols="auto"
           >
             <v-img
-              height="100px"
-              width="220px"
-              :src="require('@/assets/nentwich_logo_white_wip.svg')"
+              height="70px"
+              width="350px"
+              :src="require('@/assets/nentwichVerlag_logos_name_grey_grey.svg')"
             ></v-img>
           </v-col>
             </v-row>
           </v-container>
         </v-footer>
-      </v-container>
-    </v-main>
   </v-app>
 </template>
 
 <script>
   /* import Footer from '@/components/Footer.vue' */
+  import Cart from '@/components/shop/Cart.vue'
 
   export default {
-    components: {  },
+    components: { Cart },
     props: {
       source: String,
     },
@@ -149,11 +159,17 @@
 
 <style>
 .app-bar-gradient {
-  background: linear-gradient(90deg, #ECE6DD 30%, #2E5346 30%);
+  background: linear-gradient(90deg, #ECE6DD 40%, #2E5346 30%);
 }
 .v-toolbar__content, .v-toolbar__extension {
 	padding: 0px !important;
 }
-
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
 

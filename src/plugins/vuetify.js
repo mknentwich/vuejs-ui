@@ -14,6 +14,7 @@ export default new Vuetify({
             secondary: '#B2A89C',
             primaryAccent: '#d6d8d2',
             secondaryAccent: '#ECE6DD',
+            secondaryAccentLight: '#f8f5f2',
             highlightDark: '#3f3432'
         }
       }

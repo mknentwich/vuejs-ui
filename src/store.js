@@ -36,6 +36,16 @@ export default new Vuex.Store({
     },
     getScoreById: (state) => (id) => {
       return state.testScores.find(item => item.id === id)
+    },
+    getScorePriceById: (state) => (id) => {
+      return (state.testScores.find(item => item.id === id)).price
+    },
+    getCartTotal: (state, getters) => {
+      let total = 0
+      state.cartItems.forEach( (cartItem) => {
+        total += cartItem.quantity * getters.getScorePriceById(cartItem.id)
+      })
+      return total
     }
   },
   mutations: {

@@ -1,50 +1,61 @@
 <template>
-  <v-col cols="auto">
-    <v-sheet rounded="lg" color="secondaryAccent">
-      <v-row class="align-center justify-center">
-        <v-col cols="12" md="5" class="primary--text pl-12">
-          <div class="text-h6 font-weight-bold pb-4">
-            Ich heiße Sie herzlich auf meiner Website willkommen!
-          </div>
-          <div class="text-subtitle-1 pb-4">
-            Hier sehen Sie meine aktuellen Kompositionen und Arrangements.
-          </div>
-          <div class="text-subtitle-1 pb-4">
-            Auch können Sie mich für Workshops, Unterricht, Auftragswerke o.a. kontaktieren.
-          </div>
-          <div class="text-subtitle-1 pb-4">
-            Mit musikalischen Grüßen, <br>
-            Markus Nentwich
-          </div>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="12" md="5" justify="center" class="pa-4">
-          <v-avatar :size="300" class="d-flex">
-            <v-img
-              :src="require('@/assets/nentwich_portrait.webp')"
-              alt="Image of Markus Nentwich"
-              round
-              position="top"
-            ></v-img>
-          </v-avatar>
+  <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
+    <v-row class="align-center">
+      <v-spacer></v-spacer>
+      <v-col cols="12" sm="3" justify="center" class="d-flex">
+        <v-avatar :size="avatarSize" class="mx-auto">
           <v-img
-            justify="center"
-            class="mt-n8"
-            :src="require('@/assets/nentwich_name.svg')"
-            aspect-ratio="1.7"
-            :height="this.$vuetify.breakpoint.width / 10"
-            contain
+            :src="require('@/assets/nentwich_portrait.webp')"
+            alt="Image of Markus Nentwich"
+            position="top"
           ></v-img>
-        </v-col>
-      </v-row>
-    </v-sheet>
-  </v-col>
+        </v-avatar>
+      </v-col>
+
+      <v-col cols="12" sm="8" class="primary--text">
+        <div class="text-h6 font-weight-bold pb-4">
+          Grias di, ich bin
+        </div>
+        <v-img
+          justify="left"
+          :src="require('@/assets/markusNentwich_komma.svg')"
+          height="150"
+          width="250"
+          class="mt-n6 ml-n3"
+          contain
+        ></v-img>
+        <div class="text-h6 pb-4">
+          Posaunist, Musiker und Vollblut-Musikant <br> aus Leopolsdorf im Marchfeld.  
+        </div>
+      </v-col>
+      
+    </v-row>
+    <Quicklinks/>
+  </v-sheet>
 </template>
 
 <script>
+import Quicklinks from '@/components/Quicklinks.vue'
+
   export default {
     name: 'Introduction',
-
+    components: {
+      Quicklinks
+    },
+    computed: {
+      avatarSize: function () {
+        if (this.$vuetify.breakpoint.lgAndUp) {
+          return 250
+        }
+        if (this.$vuetify.breakpoint.mdAndUp) {
+          return 200
+        }
+        if (this.$vuetify.breakpoint.smAndUp) {
+          return '20vw'
+        }
+        return '60vw'
+      },
+    },
     data: () => ({
       
     }),
