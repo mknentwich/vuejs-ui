@@ -32,9 +32,16 @@
         this.buttonClicked = true
 
         setTimeout( () => {
+          this.scrollToTop()
+        },1000);
+
+        setTimeout( () => {
           this.buttonClicked = false
-        },3000);
-      }
+        },2000);
+      },
+      scrollToTop () {
+      this.$vuetify.goTo(0)
+    }
     }
   }
 </script>

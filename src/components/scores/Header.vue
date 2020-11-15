@@ -5,16 +5,20 @@
     
     <h1 class="text-h3 mt-n12 primary--text">{{ title }}</h1>
     <v-row class="mt-4 align-center justify-center" no-gutters>
-      <v-col cols="12" sm="auto" class="text-h6 primary--text mr-4">
+      <v-col cols="1" sm="auto" class="text-h6 primary--text">
         <v-icon class="secondary--text mr-4"> mdi-bullseye-arrow </v-icon>
+      </v-col>
+      <v-col cols="11" sm="auto" class="text-h6 primary--text">
         für {{ instrumentation }}
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="12" sm="auto" class="font-weight-bold text-h5 primary--text">
-        € {{ price }},00
+      <v-col cols="12" sm="auto" class="font-weight-bold text-h5 primary--text d-flex">
+        <span class="ml-auto">€ {{ price }},00</span>
       </v-col>
-      <v-col cols="12" sm="auto" class="ml-3">
-        <AddToCartBtn :scoreId="scoreId"></AddToCartBtn>
+      <v-col cols="12" sm="auto" class="ml-3 d-flex">
+        <span class="ml-auto">
+          <AddToCartBtn :scoreId="scoreId"></AddToCartBtn>
+        </span>
       </v-col>
     </v-row>
   </v-sheet>

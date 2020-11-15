@@ -1,5 +1,6 @@
 <template>
   <v-app id="app">
+    <!-- NAVIGATION DRAWER, toDo: outsource to separate component -->
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -28,6 +29,7 @@
       </v-list>
     </v-navigation-drawer>
 
+    <!-- APP BAR, toDo: outsource to separate component -->
     <v-app-bar
       app
       dark
@@ -64,9 +66,9 @@
     </v-container>
     </v-app-bar>
 
+    <!-- MAIN -->
     <v-main>
       <v-container>
-        
           <v-row no-gutters>
             <v-spacer></v-spacer>
             <v-col :cols="$vuetify.breakpoint.xs ? 12 : 10" v-if="$route.name !== 'Checkout'">
@@ -78,50 +80,23 @@
           </v-row>
           <v-row no-gutters>
             <v-col cols="12">
-              <transition name="component-fade" mode="out-in">
+              <!-- <transition name="component-fade" mode="out-in"> -->
               <router-view></router-view>
-              </transition>
+              <!-- </transition> -->
             </v-col>
           </v-row>
-          
-        <!-- <Footer class="align" /> -->
-        
       </v-container>
     </v-main>
-    <v-footer width="100%" color="primary">
-          <v-container>
-            <v-row>
-          <v-col cols="4">
-            <div v-for="link in footerLinks" v-bind:key="link.path" >
-            <v-btn dark class="font-weight-bold" text :to="link.path">
-              {{ link.label }}
-            </v-btn>
-            </div>
-            
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col
-            class="text-center white--text"
-            cols="auto"
-          >
-            <v-img
-              height="70px"
-              width="350px"
-              :src="require('@/assets/nentwichVerlag_logos_name_grey_grey.svg')"
-            ></v-img>
-          </v-col>
-            </v-row>
-          </v-container>
-        </v-footer>
+    <Footer :footerLinks="footerLinks" />
   </v-app>
 </template>
 
 <script>
-  /* import Footer from '@/components/Footer.vue' */
+  import Footer from '@/components/Footer.vue'
   import Cart from '@/components/shop/Cart.vue'
 
   export default {
-    components: { Cart },
+    components: { Cart, Footer },
     props: {
       source: String,
     },
@@ -161,7 +136,7 @@
           icon: 'mdi-email'
         }
       ]
-    }),
+    })
   }
 </script>
 
