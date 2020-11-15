@@ -1,5 +1,24 @@
 <template>
   <v-row>
+    <v-col cols="12">
+      <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
+        <v-row class="align-center justify-center" dense>
+          <v-col cols="auto">
+            <v-img
+              :src="require('@/assets/nentwichVerlag_logos_color.svg')"
+              height="100"
+              width="250"
+              contain
+            ></v-img>
+          </v-col>
+          <v-col cols="auto">
+            <h1 class="text-h4 font-weight-bold primary--text mb-4">
+              Noten bestellen
+            </h1>
+          </v-col>
+        </v-row>
+      </v-sheet>
+    </v-col>
     <!-- show list of scores -->
     <v-col class="d-flex align-stretch" cols="12" md="6" v-for="score in testScores" v-bind:key="score.id">
       <v-card rounded="lg" outlined color="" class="align-stretch box-shadow">
