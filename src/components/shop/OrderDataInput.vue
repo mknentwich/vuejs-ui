@@ -172,12 +172,12 @@
         </div>
       </v-col>
     </v-row>
-    <v-divider class="mt-8"></v-divider>
+    <v-divider class="mt-6"></v-divider>
     <v-row dense class="my-3">
       <v-col cols="12" md="6">
         <v-checkbox  
           inset 
-          v-model="deliveryAddressDifferentThanInvoiceAddress" 
+          v-model="termsOfServiceChecked" 
           label="Ich habe die AGB gelesen und bin einverstanden."
           class="ml-2 font-weight-bold"
           hide-details
@@ -197,7 +197,8 @@
   export default {
     name: 'OrderDataInput',
     data: () => ({
-      deliveryAddressDifferentThanInvoiceAddress: true
+      deliveryAddressDifferentThanInvoiceAddress: true,
+      termsOfServiceChecked: false
     }),
     computed: {
     },

@@ -17,14 +17,25 @@
               {{ `${getScoreById(cartItem.id).title} (${getScoreById(cartItem.id).instrumentation})` }}
             </v-col>
             <v-spacer></v-spacer>
+            <v-col cols="auto" class="mr-5">
+              
+            </v-col>
             <v-col cols="auto">
-              {{ getScoreById(cartItem.id).price }},00 €
+              je {{ getScoreById(cartItem.id).price }},00 €
             </v-col>
           </v-row>
         </v-list-item-title>
         <v-list-item-subtitle>
-          quantitiy: {{ cartItem.quantity }},
-          ID: {{ cartItem.id }}
+          <span class="font-weight-bold">
+            Menge:
+          </span>
+          <v-btn icon small color="primary" @click="removeFromCart(cartItem.id)">
+            <v-icon>mdi-minus-circle</v-icon>
+          </v-btn>
+          {{ cartItem.quantity }}
+          <v-btn icon small color="primary" @click="addToCart(cartItem.id)">
+            <v-icon>mdi-plus-circle</v-icon>
+          </v-btn>
         </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
@@ -56,7 +67,8 @@
 
 <script>
   import {
-    mapState
+    mapState,
+    mapMutations
   } from 'vuex'
 
   export default {
@@ -68,6 +80,8 @@
       ...mapState(['cartItems', 'getCartTotal'])
     },
     methods: {
+      ...mapMutations(['addToCart', 'removeFromCart']),
+
       getScoreById: function(id) {
         return this.$store.getters.getScoreById(id)
       }

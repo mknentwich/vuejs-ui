@@ -59,6 +59,22 @@ export default new Vuex.Store({
         let cartItemRef = state.cartItems.filter(item => item.id === id)
         Vue.set(cartItemRef[0], 'quantity', cartItemRef[0].quantity + 1)
       } 
+    },
+    removeFromCart: function(state, id) {
+      // check if item is in cart
+      let index = state.cartItems.findIndex(item => item.id === id)
+
+      if (index !== -1) {
+        let quantity = state.cartItems[index].quantity
+        
+        if (quantity > 1) {
+          // if item quantity is > 1, decrease quanitity by one
+          Vue.set(state.cartItems[index], 'quantity', quantity - 1)
+        } else {
+          // else remove item entirely
+          state.cartItems.splice(index ,1)
+        }
+      }
     }
   },
   actions: {

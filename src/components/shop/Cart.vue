@@ -4,7 +4,7 @@
       <v-expansion-panel class="border">
         <v-expansion-panel-header color="primaryAccent">
           <v-row no-gutters align="center">
-            <v-col>
+            <v-col cols="12" sm="auto">
               <v-badge
                 left
                 inline
@@ -18,8 +18,8 @@
               <span class="font-weight-bold text-subtitle-1 primary--text">Mein Warenkorb</span>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col cols="auto">
-              <v-btn color="primary" depressed rounded class="mr-4" to="/shop/checkout">
+            <v-col cols="12" sm="auto" :class="$vuetify.breakpoint.xsOnly ? 'mt-3' : 'mr-3'">
+              <v-btn color="primary" depressed rounded to="/shop/checkout">
                 <v-icon left>mdi-arrow-right</v-icon>
                 zur Kasse
               </v-btn>
