@@ -1,5 +1,5 @@
 <template>
-  <v-sheet rounded="lg" outlined class="pa-4 box-shadow">
+  <v-sheet rounded="lg" outlined class="pa-4 box-shadow secondaryAccentLight">
     <!-- decoration dividers to symbolize stave -->
     <v-divider v-for="n in 5" v-bind:key="n" class="mb-2"></v-divider>
     
@@ -51,9 +51,3 @@
     },
   }
 </script>
-<style scoped>
-.box-shadow {
-  box-shadow: 5px 5px 0px #d5d5d5 !important;
-  height: 100%;
-}
-</style>

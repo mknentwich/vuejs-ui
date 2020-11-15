@@ -1,5 +1,5 @@
 <template>
-  <v-sheet rounded="lg" color="secondaryAccentLight" class="pa-4">
+  <v-sheet rounded="lg" color="secondaryAccentLight box-shadow" class="pa-4">
     <!-- author -->
     <v-row>
       <v-col cols="1" class="text-subtitle-2 primary--text">
@@ -74,9 +74,3 @@
     },
   }
 </script>
-<style scoped>
-.box-shadow {
-  box-shadow: 5px 5px 0px #d5d5d5 !important;
-  height: 100%;
-}
-</style>

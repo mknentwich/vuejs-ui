@@ -69,7 +69,7 @@
         
           <v-row no-gutters>
             <v-spacer></v-spacer>
-            <v-col cols="10">
+            <v-col cols="10" v-if="$route.name !== 'Checkout'">
               <v-scale-transition>
               <Cart/>
               </v-scale-transition>
@@ -181,6 +181,10 @@
 }
 .container {
   max-width: 1400px;
+}
+.box-shadow {
+  box-shadow: 5px 5px 0px #d5d5d5 !important;
+  height: 100%;
 }
 </style>
 

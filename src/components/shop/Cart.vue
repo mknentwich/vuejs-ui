@@ -19,7 +19,7 @@
             </v-col>
             <v-spacer></v-spacer>
             <v-col cols="auto">
-              <v-btn color="primary" depressed rounded class="mr-4">
+              <v-btn color="primary" depressed rounded class="mr-4" to="/shop/checkout">
                 <v-icon left>mdi-arrow-right</v-icon>
                 zur Kasse
               </v-btn>
@@ -27,62 +27,7 @@
           </v-row>
         </v-expansion-panel-header>
         <v-expansion-panel-content style="padding: 0px !important;">
-          <v-list class="pa-0">
-            <!-- list all items in cart -->
-            <v-list-item
-              v-for="(cartItem, index) in cartItems" 
-              v-bind:key="cartItem.id"
-              :class="index % 2 ? 'primaryAccentLightAlt' : 'primaryAccentLight'"
-            >
-              <v-list-item-avatar>
-                <v-icon>mdi-book-music</v-icon>
-              </v-list-item-avatar>
-
-              <v-list-item-content class="py-1">
-                <v-list-item-title>
-                  <v-row no-gutters>
-                    <v-col cols="auto">
-                      {{ `${getScoreById(cartItem.id).title} (${getScoreById(cartItem.id).instrumentation})` }}
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-col cols="auto">
-                      {{ getScoreById(cartItem.id).price }},00 €
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  quantitiy: {{ cartItem.quantity }},
-                  ID: {{ cartItem.id }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <!-- show total -->
-            <v-list-item
-              class="primaryAccent"
-            >
-              <v-list-item-avatar>
-                <v-icon>mdi-sigma</v-icon>
-              </v-list-item-avatar>
-
-              <v-list-item-content class="py-0">
-                <v-list-item-title>
-                  <v-row no-gutters>
-                    <v-col cols="auto" class="font-weight-bold">
-                      Gesamtbetrag
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-col cols="auto" class="font-weight-bold">
-                      
-                       {{ $store.getters.getCartTotal }},00  €
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-                <v-list-item-subtitle>
-
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+          <CartItems></CartItems>
         </v-expansion-panel-content>
       </v-expansion-panel>
   </v-expansion-panels>
@@ -90,6 +35,7 @@
 </template>
 
 <script>
+  import CartItems from '@/components/shop/CartItems.vue'
   import {
     mapMutations,
     mapState
@@ -97,11 +43,12 @@
 
   export default {
     name: 'Cart',
+    components: { CartItems },
     data: () => ({
       
     }),
     computed: {
-      ...mapState(['testScores', 'cartItems', 'getCartTotal'])
+      ...mapState(['cartItems', 'getCartTotal'])
     },
     methods: {
       ...mapMutations(['addToCart']),
