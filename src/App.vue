@@ -16,8 +16,8 @@
     </v-row>
       <v-divider></v-divider>
 
-      <v-list>
-        <v-list-item link v-for="item in navItems" v-bind:key="item.path">
+      <v-list nav>
+        <v-list-item link v-for="item in navItems" v-bind:key="item.path" :to="item.path">
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -56,7 +56,7 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="auto" class="primary pa-4" v-if="!$vuetify.breakpoint.mobile">
-          <v-btn class="font-weight-bold" text :to="item.path" v-for="item in navItems" v-bind:key="item.path">
+          <v-btn rounded class="font-weight-bold mx-1" text :to="item.path" v-for="item in navItems" v-bind:key="item.path">
           {{ item.label }}
         </v-btn>
         </v-col>
@@ -66,16 +66,24 @@
 
     <v-main>
       <v-container>
-        <transition name="component-fade" mode="out-in">
+        
+          <v-row no-gutters>
+            <v-spacer></v-spacer>
+            <v-col cols="10">
+              <v-scale-transition>
+              <Cart/>
+              </v-scale-transition>
+            </v-col>
+            <v-spacer></v-spacer>
+          </v-row>
           <v-row no-gutters>
             <v-col cols="12">
-              <Cart/>
-            </v-col>
-            <v-col cols="12">
+              <transition name="component-fade" mode="out-in">
               <router-view></router-view>
+              </transition>
             </v-col>
           </v-row>
-        </transition>
+          
         <!-- <Footer class="align" /> -->
         
       </v-container>
@@ -170,6 +178,9 @@
 .component-fade-enter, .component-fade-leave-to
 /* .component-fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.container {
+  max-width: 1400px;
 }
 </style>
 

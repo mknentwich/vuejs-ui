@@ -32,7 +32,7 @@
             <v-list-item
               v-for="(cartItem, index) in cartItems" 
               v-bind:key="cartItem.id"
-              :class="index % 2 ? 'grey lighten-4' : 'grey lighten-5'"
+              :class="index % 2 ? 'primaryAccentLightAlt' : 'primaryAccentLight'"
             >
               <v-list-item-avatar>
                 <v-icon>mdi-book-music</v-icon>

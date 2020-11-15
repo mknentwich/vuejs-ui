@@ -11,7 +11,7 @@
 import Overview from '@/components/scores/Overview.vue'
 
 export default {
-  name: 'Home',
+  name: 'ShopHome',
   components: {
     Overview
   }
