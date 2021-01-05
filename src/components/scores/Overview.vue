@@ -86,6 +86,13 @@
     },
     methods: {
       ...mapMutations(['addToCart']),
+    },
+    created() {
+      fetch('http://localhost:2812/api/v1/catalogue/')
+        .then(response => response.json())
+        .then(json => {
+          console.log(json)
+        })
     }
   }
 </script>
