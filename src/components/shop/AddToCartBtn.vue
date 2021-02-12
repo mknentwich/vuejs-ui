@@ -28,7 +28,7 @@
     methods: {
       ...mapMutations(['addToCart']),
       addToCartAndShowMsg: function () {
-        this.addToCart(this.scoreId)
+        this.fetchScoreMetadataAndAddToCart()
         this.buttonClicked = true
 
         setTimeout( () => {
@@ -38,6 +38,20 @@
         setTimeout( () => {
           this.buttonClicked = false
         },2000);
+      },
+      fetchScoreMetadataAndAddToCart: function() {
+        var that = this
+        fetch(`/api/v1/catalogue/scores/${this.scoreId}`)
+        .then(response => response.json())
+        .then(json => {
+          let cartItem = {
+            id: that.scoreId,
+            title: json.title,
+            price: json.price,
+            instrumentation: json.instrumentation
+          }
+          this.addToCart(cartItem)
+        })
       },
       scrollToTop () {
       this.$vuetify.goTo(0)

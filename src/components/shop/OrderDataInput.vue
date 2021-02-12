@@ -9,6 +9,7 @@
         <v-row dense>
           <v-col cols="5">
             <v-text-field
+              v-model="orderObject.identity.salutation"
               dense
               outlined
               hide-details
@@ -19,6 +20,7 @@
         <v-row dense>
           <v-col cols="5">
             <v-text-field
+              v-model="orderObject.identity.firstName"
               dense
               hide-details
               outlined
@@ -27,6 +29,7 @@
           </v-col>
           <v-col cols="5">
             <v-text-field
+              v-model="orderObject.identity.lastName"
               dense
               hide-details
               outlined
@@ -43,6 +46,7 @@
         <v-row dense>
           <v-col cols="5">
             <v-text-field
+              v-model="orderObject.identity.company"
               dense
               outlined
               hide-details
@@ -59,6 +63,7 @@
         <v-row dense>
           <v-col cols="10">
             <v-text-field
+              v-model="orderObject.identity.email"
               dense
               outlined
               hide-details
@@ -68,6 +73,7 @@
           </v-col>
           <v-col cols="10">
             <v-text-field
+              v-model="orderObject.identity.telephone"
               dense
               outlined
               hide-details
@@ -85,6 +91,7 @@
         <v-row dense>
           <v-col cols="7">
             <v-text-field
+              v-model="orderObject.identity.address.street"
               dense
               outlined
               hide-details
@@ -93,6 +100,7 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
+              v-model="orderObject.identity.address.streetNumber"
               dense
               outlined
               hide-details
@@ -103,6 +111,7 @@
         <v-row dense>
           <v-col cols="3">
             <v-text-field
+              v-model="orderObject.identity.address.postCode"
               dense
               outlined
               hide-details
@@ -111,11 +120,25 @@
           </v-col>
           <v-col cols="7">
             <v-text-field
+              v-model="orderObject.identity.address.city"
               dense
               outlined
               hide-details
               label="Ort"
             ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col cols="3">
+            <v-select
+              dense
+              outlined
+              v-model="orderObject.identity.address.stateId"
+              :items="states"
+              item-text="name"
+              item-value="id"
+              label="Land"
+            ></v-select>
           </v-col>
         </v-row>
       </v-col>
@@ -136,6 +159,7 @@
           <v-row dense>
             <v-col cols="7">
               <v-text-field
+                v-model="deliveryAddress.street"
                 dense
                 outlined
                 hide-details
@@ -144,6 +168,7 @@
             </v-col>
             <v-col cols="3">
               <v-text-field
+                v-model="deliveryAddress.streetNumber"
                 dense
                 outlined
                 hide-details
@@ -154,6 +179,7 @@
           <v-row dense>
             <v-col cols="3">
               <v-text-field
+                v-model="deliveryAddress.postCode"
                 dense
                 outlined
                 hide-details
@@ -162,11 +188,25 @@
             </v-col>
             <v-col cols="7">
               <v-text-field
+                v-model="deliveryAddress.city"
                 dense
                 outlined
                 hide-details
                 label="Ort"
               ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row dense>
+            <v-col cols="3">
+              <v-select
+                dense
+                outlined
+                v-model="deliveryAddress.stateId"
+                :items="states"
+                item-text="name"
+                item-value="id"
+                label="Land"
+              ></v-select>
             </v-col>
           </v-row>
         </div>
@@ -184,7 +224,7 @@
         ></v-checkbox>
       </v-col>
       <v-col cols="12" md="6">
-        <v-btn rounded class="primary font-weight-black">
+        <v-btn rounded class="primary font-weight-black" @click="placeOrder()">
           <v-icon class="mr-1">mdi-arrow-right</v-icon>
           Kostenpflichtig bestellen
         </v-btn>
@@ -194,17 +234,78 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
   export default {
     name: 'OrderDataInput',
     data: () => ({
       deliveryAddressDifferentThanInvoiceAddress: true,
-      termsOfServiceChecked: false
+      termsOfServiceChecked: false,
+      states: [],
+      orderObject: {
+        identity: {
+          salutation: '',
+          firstName: '',
+          lastName: '',
+          company: '',
+          email: '',
+          telephone: '',
+          address: {
+            city: '',
+            postCode: '',
+            street: '',
+            streetNumber: '',
+            stateId: ''
+          }
+        }
+      },
+      deliveryAddress: {
+        city: '',
+        postCode: '',
+        street: '',
+        streetNumber: '',
+        stateId: ''
+      }
     }),
     computed: {
+      ...mapState(['cartItems']),
     },
     methods: {
+      ...mapGetters(['getCartItemsIdAndQuantity']),
+      fetchStates: function() {
+        var that = this
+        fetch('/api/v1/meta/states/')
+        .then(response => response.json())
+        .then(json => {
+          that.states = json
+        })
+      },
+      placeOrder: function() {
+        var that = this
+        if (that.deliveryAddressDifferentThanInvoiceAddress) {
+          that.orderObject.deliveryAddress = that.deliveryAddress
+        }
 
-    }
+        if (that.cartItems.length) {
+          that.orderObject.items = that.getCartItemsIdAndQuantity()
+        } else {
+          console.log('no items in cart')
+        }
+        
+        console.log('orderObject', that.orderObject)
+
+        fetch('/api/v1/orders/', {
+          method: 'POST',
+          body: JSON.stringify(that.orderObject)
+        })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json)
+        })
+      }
+    },
+    beforeMount() {
+      this.fetchStates()
+    },
   }
 </script>
 

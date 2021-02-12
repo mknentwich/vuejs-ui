@@ -14,14 +14,14 @@
         <v-list-item-title>
           <v-row no-gutters>
             <v-col cols="auto">
-              {{ `${getScoreById(cartItem.id).title} (${getScoreById(cartItem.id).instrumentation})` }}
+              {{ `${cartItem.title} (${cartItem.instrumentation})` }}
             </v-col>
             <v-spacer></v-spacer>
             <v-col cols="auto" class="mr-5">
               
             </v-col>
             <v-col cols="auto">
-              je {{ getScoreById(cartItem.id).price }},00 €
+              je {{ cartItem.price.toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
             </v-col>
           </v-row>
         </v-list-item-title>
@@ -29,11 +29,11 @@
           <span class="font-weight-bold">
             Menge:
           </span>
-          <v-btn icon small color="primary" @click="removeFromCart(cartItem.id)">
+          <v-btn icon small color="primary" @click="decrementQuantityOrRemoveCartItem(cartItem.id)">
             <v-icon>mdi-minus-circle</v-icon>
           </v-btn>
           {{ cartItem.quantity }}
-          <v-btn icon small color="primary" @click="addToCart(cartItem.id)">
+          <v-btn icon small color="primary" @click="incrementQuantityOfCartItem(cartItem.id)">
             <v-icon>mdi-plus-circle</v-icon>
           </v-btn>
         </v-list-item-subtitle>
@@ -55,7 +55,7 @@
             </v-col>
             <v-spacer></v-spacer>
             <v-col cols="auto" class="font-weight-bold">
-                {{ $store.getters.getCartTotal }},00  €
+              {{ getCartTotal().toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
             </v-col>
           </v-row>
         </v-list-item-title>
@@ -68,7 +68,8 @@
 <script>
   import {
     mapState,
-    mapMutations
+    mapMutations,
+    mapGetters
   } from 'vuex'
 
   export default {
@@ -77,14 +78,12 @@
       
     }),
     computed: {
-      ...mapState(['cartItems', 'getCartTotal'])
+      ...mapState(['cartItems']),
+      
     },
     methods: {
-      ...mapMutations(['addToCart', 'removeFromCart']),
-
-      getScoreById: function(id) {
-        return this.$store.getters.getScoreById(id)
-      }
+      ...mapMutations(['incrementQuantityOfCartItem', 'decrementQuantityOrRemoveCartItem']),
+      ...mapGetters(['getCartTotal'])
     }
   }
 </script>

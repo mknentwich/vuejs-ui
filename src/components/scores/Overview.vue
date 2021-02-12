@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
-        <v-row class="align-center justify-center" dense>
+        <v-row class="align-center" dense>
           <v-col cols="auto">
             <v-img
               :src="require('@/assets/nentwichVerlag_logos_color.svg')"
@@ -12,64 +12,58 @@
             ></v-img>
           </v-col>
           <v-col cols="auto">
-            <h1 class="text-h4 font-weight-bold primary--text mb-4">
+            <h1 class="text-h4 font-weight-bold primary--text">
               Noten bestellen
             </h1>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            <v-row dense class="align-center">
+              <v-col cols="auto">
+                <v-icon color="primary">mdi-filter</v-icon>
+              </v-col>
+              <v-col cols="auto">
+                <v-chip 
+                  v-for="category in allCategories" 
+                  v-bind:key="category.id"
+                  :color="selectedCategories.includes(category.id) ? 'primary' : 'primaryAccent'"
+                  @click="addOrRemoveFromSelectedCategories(category.id)"
+                  class="font-weight-bold mx-1"
+                  link
+                > 
+                  {{ category.name }}
+                </v-chip>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-sheet>
     </v-col>
-    <!-- show list of scores -->
-    <v-col class="d-flex align-stretch" cols="12" md="6" v-for="score in testScores" v-bind:key="score.id">
-      <v-card rounded="lg" outlined color="" class="align-stretch box-shadow">
-        <v-card-title class="primaryAccentLight font-weight-bold primary--text">
-          <router-link :to="`score/${score.id}`" class="no-underline">
-            {{ score.title }}
-          </router-link>
-          <v-spacer></v-spacer>
-          <v-chip small outlined color="primary primary--text font-weight-bold px-6">{{ score.category }}</v-chip>
-        </v-card-title>
-        <v-divider></v-divider>
+    <v-col cols="12" class="text-center">
+      <!-- create list by category -->
+      <div v-for="category in catalogue" v-bind:key="category.id" class="text-center mb-6">
 
-        <v-card-text>
-          <div class="mb-3">
-            {{ score.description }}
-          </div>
-          <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold"> für {{ score.instrumentation }} </v-chip>
-          <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold">
-            <span class="mr-3"> Schwierigkeit </span>
-            <span v-for="n in 5" v-bind:key="n">
-              <v-icon small :color="n <= score.difficulty ? 'primary' : 'primaryAccent'">mdi-checkbox-blank-circle</v-icon>
-            </span>
-          </v-chip>
-        </v-card-text>
+        <h2 class="primary--text">{{category.namePlural}}</h2>
 
-        <v-card-actions class="mt-0 secondaryAccentLight">
-          <v-row class="mx-auto no-gutters">
-            <v-col cols="12" md="auto" class="mt-1 ml-1">
-              <v-btn rounded small depressed color="primaryAccent font-weight-bold mr-2" :to="`score/${score.id}`">
-                <v-icon left>mdi-information-variant</v-icon>
-                Details
-              </v-btn>
-            </v-col>
-            <v-spacer></v-spacer>
-            <v-col cols="auto">
-              <span class="mr-2 text-h6 primary--text font-weight-black">
-                {{ score.price }},00 €
-              </span>
-
-              <AddToCartBtn :scoreId="score.id"></AddToCartBtn>
-
-            </v-col>
-          </v-row>
-        </v-card-actions>
-      </v-card>
+        <!-- show list of scores associated w category -->
+        <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in category.scores" v-bind:key="score.id">
+          <ScoreCard :score="score" :categoryName="category.name"></ScoreCard>
+        </v-col>
+        <!-- show sub-categories -->
+        <div v-for="subcategory in category.children" v-bind:key="subcategory.id" rounded="lg">
+          <h3 class="primary--text">{{subcategory.namePlural}}</h3>
+          <!-- show list of scores -->
+          <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in subcategory.scores" v-bind:key="score.id">
+            <ScoreCard :score="score" :categoryName="subcategory.name"></ScoreCard>
+          </v-col>
+      </div>
+      </div>
     </v-col>
   </v-row>
 </template>
 
 <script>
-  import AddToCartBtn from '@/components/shop/AddToCartBtn.vue'
+  import ScoreCard from '@/components/scores/ScoreCard.vue'
   import {
     mapMutations,
     mapState
@@ -77,22 +71,45 @@
 
   export default {
     name: 'Overview',
-    components: { AddToCartBtn },
+    components: { ScoreCard },
     data: () => ({
-      
+      scores: [],
+      catalogue: [],
+      allCategories: [],
+      selectedCategories: []
     }),
     computed: {
-      ...mapState(['testScores']),
+      ...mapState(['testScores'])
     },
     methods: {
       ...mapMutations(['addToCart']),
-    },
-    created() {
-      fetch('http://localhost:2812/api/v1/catalogue/')
+      fetchScores: function() {
+        var that = this
+        fetch('/api/v1/catalogue/')
         .then(response => response.json())
         .then(json => {
           console.log(json)
+          that.catalogue = json.children
+          that.setAllCategories()
         })
+      },
+      setAllCategories: function() {
+        this.catalogue.forEach(function(category) {
+          this.allCategories.push({id: category.id, name: category.name})
+          // by default all categories are to be shown
+          this.selectedCategories.push(category.id)
+        }, this);
+      },
+      addOrRemoveFromSelectedCategories: function(id) {
+        if (this.selectedCategories.includes(id)) {
+          this.selectedCategories.splice(this.selectedCategories.indexOf(id), 1)
+        } else {
+          this.selectedCategories.push(id)
+        }
+      }
+    },
+    created() {
+      this.fetchScores()
     }
   }
 </script>

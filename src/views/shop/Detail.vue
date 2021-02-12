@@ -24,12 +24,12 @@
           <ScoreMetadata
           :author="score.author"
           :description="score.description"
-          :category="score.category"
+          :category="score.categoryId"
           :difficulty="score.difficulty"
           ></ScoreMetadata>
         </v-col>
         <v-col cols="12">
-          <Player></Player>
+          <Player :scoreId="score.id"></Player>
         </v-col>
       </v-row>
       
@@ -61,12 +61,18 @@
       }
     },
     methods: {
-      getScoreById: function (id) {
-        return this.$store.getters.getScoreById(id)
+      fetchScoreById: function (id) {
+        var that = this
+        fetch(`/api/v1/catalogue/scores/${id}`)
+        .then(response => response.json())
+        .then(json => {
+          console.log(json)
+          that.score = json
+        })
       }
     },
     created() {
-      this.score = this.getScoreById(Number(this.$route.params.scoreId))
+      this.score = this.fetchScoreById(this.$route.params.scoreId)
     },
   }
 </script>
