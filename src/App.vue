@@ -71,7 +71,7 @@
       <v-container>
           <v-row no-gutters>
             <v-spacer></v-spacer>
-            <v-col :cols="$vuetify.breakpoint.xs ? 12 : 10" v-if="$route.name !== 'Checkout'">
+            <v-col :cols="$vuetify.breakpoint.xs ? 12 : 10" v-if="!$route.meta.hideCart === true">
               <v-scale-transition>
               <Cart/>
               </v-scale-transition>

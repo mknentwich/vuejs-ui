@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ShopHome from '../views/shop/Home.vue'
 import ScoreDetails from '../views/shop/Detail.vue'
-import Checkout from '../views/Checkout.vue'
+import Checkout from '../views/shop/Checkout.vue'
+import Confirm from '../views/shop/ConfirmOrder.vue'
 import Contact from '../views/Contact.vue'
 import Biography from '../views/Biography.vue'
 
@@ -23,7 +24,14 @@ const routes = [
   {
     path: '/shop/checkout',
     name: 'Checkout',
-    component: Checkout
+    component: Checkout,
+    meta: { hideCart: true }
+  },
+  {
+    path: '/shop/confirmOrder',
+    name: 'ConfirmOrder',
+    component: Confirm,
+    meta: { hideCart: true }
   },
   {
     path: '/score/:scoreId',

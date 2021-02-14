@@ -5,13 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    cartItems: []
+    cartItems: [],
+    orderDetails: {},
+    optionalDeliveryAddress: {},
+    orderDetailsAreValid: false,
+    orderConfirmation: {}
   },
   getters: {
     getCartItemsIdAndQuantity: state => {
       let cartItems = []
       state.cartItems.forEach( (cartItem) => {
-        cartItems.push({id: cartItem.id, quantitiy: cartItem.quantity})
+        cartItems.push({id: cartItem.id, quantity: cartItem.quantity})
       })
       return cartItems
     },
@@ -24,6 +28,14 @@ export default new Vuex.Store({
         total += cartItem.quantity * cartItem.price
       })
       return total
+    },
+    getOrderDetails: (state, getters) => {
+      let orderDetailsObject = state.orderDetails
+      if (state.optionalDeliveryAddress) {
+        orderDetailsObject.deliveryAddress = state.optionalDeliveryAddress
+      }
+      orderDetailsObject.items = getters.getCartItemsIdAndQuantity
+      return orderDetailsObject
     }
   },
   mutations: {
@@ -56,6 +68,18 @@ export default new Vuex.Store({
           state.cartItems.splice(index ,1)
         }
       }
+    },
+    setOrderDetails: function(state, orderDetails) {
+      state.orderDetails = orderDetails
+    },
+    setOptionalDeliveryAddress: function(state, optionalDeliveryAdress) {
+      state.optionalDeliveryAddress = optionalDeliveryAdress
+    },
+    setOrderDetailsAreValid: function(state, orderDetailsAreValid) {
+      state.orderDetailsAreValid = orderDetailsAreValid
+    },
+    setOrderConfirmation: function(state, orderConfirmation) {
+      state.orderConfirmation = orderConfirmation
     }
   },
   actions: {
