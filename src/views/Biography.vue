@@ -42,7 +42,7 @@
         <template v-slot:opposite>
           <span class="font-weight-bold primary--text text-h5">{{ timelineItem.title }}</span>
         </template>
-        <v-card class="elevation-2">
+        <v-card class="secondaryAccent" elevation="0">
           <v-card-text>
             {{ timelineItem.text }}
           </v-card-text>
@@ -57,7 +57,7 @@
       timelineItems: [
         {
           title: 'Anfänge',
-          text: 'Meine ersten Trompeten- und Posaunenunterricht erhielt ich mit fünf Jahren in der örtlichen Musikschule bei meinem Vater Felix. Nach einigen Jahren bei Mag. Reinhard Stöckl und einem Jahr bei Thomas Zsivkovits begann ich 2010 mit dem Vorbereitungslehrgang an der Universität für Musik und darstellende Kunst Wien bei Prof. Otmar Gaiswinkler.'
+          text: 'Meinen ersten Trompeten- und Posaunenunterricht erhielt ich mit fünf Jahren in der örtlichen Musikschule bei meinem Vater Felix. Nach einigen Jahren bei Mag. Reinhard Stöckl und einem Jahr bei Thomas Zsivkovits begann ich 2010 mit dem Vorbereitungslehrgang an der Universität für Musik und darstellende Kunst Wien bei Prof. Otmar Gaiswinkler.'
         },
         {
           title: 'Schulzeit & danach',

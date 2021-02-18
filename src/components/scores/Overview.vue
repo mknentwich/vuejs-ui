@@ -1,13 +1,13 @@
 <template>
-  <v-row>
+  <v-row no-gutters>
     <v-col cols="12">
-      <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
-        <v-row class="align-center" dense>
+      <v-sheet rounded="lg" color="grey lighten-3" class="pa-2">
+        <v-row class="align-center justify-center" dense>
           <v-col cols="auto">
             <v-img
               :src="require('@/assets/nentwichVerlag_logos_color.svg')"
-              height="100"
-              width="250"
+              height="90"
+              width="200"
               contain
             ></v-img>
           </v-col>
@@ -16,6 +16,7 @@
               Noten bestellen
             </h1>
           </v-col>
+          <!-- Filter functionality not yet implemented 
           <v-spacer></v-spacer>
           <v-col cols="auto">
             <v-row dense class="align-center">
@@ -35,7 +36,7 @@
                 </v-chip>
               </v-col>
             </v-row>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-sheet>
     </v-col>
@@ -43,6 +44,7 @@
       <!-- create list by category -->
       <div v-for="category in catalogue" v-bind:key="category.id" class="text-center mb-6">
 
+        <v-divider class="my-2"></v-divider>
         <h2 class="primary--text">{{category.namePlural}}</h2>
 
         <!-- show list of scores associated w category -->
@@ -56,7 +58,7 @@
           <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in subcategory.scores" v-bind:key="score.id">
             <ScoreCard :score="score" :categoryName="subcategory.name"></ScoreCard>
           </v-col>
-      </div>
+        </div>
       </div>
     </v-col>
   </v-row>

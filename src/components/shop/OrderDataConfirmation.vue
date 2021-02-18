@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-body-1">
     <!-- invoice address -->
     <v-row no-gutters>
       <v-col cols="12" class="text-overline primary--text font-weight-bold">

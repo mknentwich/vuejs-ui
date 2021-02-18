@@ -4,7 +4,31 @@
       <v-icon small class="mr-1">mdi-arrow-left</v-icon>
       Bestellung bearbeiten
     </v-btn>
-    <v-row>
+    <!-- show error messsage in case no order confirmation is present -->
+    <v-row v-if="!Object.keys(orderConfirmation).length">
+      <v-col cols="12">
+        <v-card flat color="primaryAccentLightAlt">
+          <v-card-text>
+            <v-row>
+              <v-col cols="2" class="text-right">
+                <v-icon size="60" color="secondary">mdi-information</v-icon>
+              </v-col>
+              <v-col cols="10">
+                <div class="text-h5 font-weight-bold primary--text">
+                  Keine Bestellbestätigung vorhanden. 
+                </div>
+                <div class="text-subtitle-1">
+                  Bitte starten Sie Ihre Bestellung erneut!
+                </div>
+              </v-col>
+            </v-row>
+            
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <!-- show order confirmation -->
+    <v-row v-if="Object.keys(orderConfirmation).length">
       <v-col cols="12" md="5">
         <v-card outlined rounded="lg" class="box-shadow primaryAccentLight">
           <v-card-title class="primary--text font-weight-bold">
@@ -42,22 +66,20 @@
 
 
   import {
-    mapState
+    mapState,
+    mapMutations
   } from 'vuex'
 
   export default {
     name: 'ConfirmOrder',
     components: { OrderItemsConfirmation, OrderDataConfirmation },
-    props: {
-      confirmation: Object
-    },
     data: () => ({
-      
     }),
     computed: {
       ...mapState(['orderConfirmation'])
     },
     methods: {
+      ...mapMutations(['resetCartAndOrderConfirmation']),
       confirmOrder: function() {
         var that = this
 
@@ -67,7 +89,11 @@
         };
         fetch(`/api/v1/orders/confirmations/${that.orderConfirmation.id}`, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+          console.log(result)
+          that.resetCartAndOrderConfirmation()
+          that.$router.push('/shop/thanks')
+          })
         .catch(error => console.log('error', error));
       },
     }

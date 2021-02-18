@@ -79,7 +79,7 @@
             <v-spacer></v-spacer>
           </v-row>
           <v-row no-gutters>
-            <v-col cols="12">
+            <v-col cols="12" class="pt-2">
               <!-- <transition name="component-fade" mode="out-in"> -->
               <router-view></router-view>
               <!-- </transition> -->

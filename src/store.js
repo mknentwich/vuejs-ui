@@ -46,7 +46,8 @@ export default new Vuex.Store({
         state.cartItems.push(submittedCartItem)
       } else {
         // if item already is in cart, increase quantity by one
-        this.incrementQuantityOfCartItem(submittedCartItem.id)
+        let cartItemRef = state.cartItems.filter(item => item.id === submittedCartItem.id)
+        Vue.set(cartItemRef[0], 'quantity', cartItemRef[0].quantity + 1)
       } 
     },
     incrementQuantityOfCartItem: function(state, id) {
@@ -80,6 +81,10 @@ export default new Vuex.Store({
     },
     setOrderConfirmation: function(state, orderConfirmation) {
       state.orderConfirmation = orderConfirmation
+    },
+    resetCartAndOrderConfirmation: function(state) {
+      state.cartItems = []
+      state.orderConfirmation = []
     }
   },
   actions: {

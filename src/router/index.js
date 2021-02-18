@@ -5,6 +5,7 @@ import ShopHome from '../views/shop/Home.vue'
 import ScoreDetails from '../views/shop/Detail.vue'
 import Checkout from '../views/shop/Checkout.vue'
 import Confirm from '../views/shop/ConfirmOrder.vue'
+import Thanks from '../views/shop/Thanks.vue'
 import Contact from '../views/Contact.vue'
 import Biography from '../views/Biography.vue'
 
@@ -31,6 +32,12 @@ const routes = [
     path: '/shop/confirmOrder',
     name: 'ConfirmOrder',
     component: Confirm,
+    meta: { hideCart: true }
+  },
+  {
+    path: '/shop/thanks',
+    name: 'Thanks',
+    component: Thanks,
     meta: { hideCart: true }
   },
   {

@@ -1,9 +1,9 @@
 <template>
-  <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
+  <v-sheet rounded="lg" color="secondaryAccent" class="py-6">
     <v-row class="align-center">
       <v-spacer></v-spacer>
       <v-col cols="12" sm="3" justify="center" class="d-flex">
-        <v-avatar :size="avatarSize" class="mx-auto">
+        <v-avatar :size="avatarSize" class="mx-auto hidden-xs-only">
           <v-img
             :src="require('@/assets/nentwich_portrait.webp')"
             alt="Image of Markus Nentwich"
@@ -12,52 +12,58 @@
         </v-avatar>
       </v-col>
 
-      <v-col cols="12" sm="8" class="primary--text">
+      <v-col cols="12" sm="8" class="primary--text pl-6">
         <div class="text-h6 font-weight-bold pb-4">
-          Servus, ich bin
+          Ihre Bestellung ist eingegangen.
         </div>
         <v-img
           justify="left"
-          :src="require('@/assets/markusNentwich_komma.svg')"
+          :src="require('@/assets/nentwichVerlag_logos_thanks_green_green.svg')"
           height="150"
-          width="250"
-          class="mt-n6 ml-n3"
+          width="300"
+          class="mt-n5 ml-n8"
           contain
         ></v-img>
         <div class="text-h6 pb-4">
-          Posaunist, Musiker und Vollblut-Musikant <br> aus Leopolsdorf im Marchfeld.  
+          Rechnung und weitere Informationen erhalten Sie per E-Mail. <br> Bei weiteren Fragen stehe ich jederzeit gerne zur Verfügung.  
         </div>
       </v-col>
-      
     </v-row>
-    <Quicklinks/>
+    <v-row class="text-center">
+      <v-col>
+        <v-btn 
+          outlined 
+          rounded 
+          large 
+          class="primary--text"
+          to="/">
+          <v-icon class="mr-2"> mdi-home </v-icon>
+          zurück zur Startseite
+        </v-btn>
+      </v-col>
+    </v-row>
+
   </v-sheet>
 </template>
 
 <script>
-import Quicklinks from '@/components/Quicklinks.vue'
-
   export default {
-    name: 'Introduction',
-    components: {
-      Quicklinks
-    },
+    name: 'Thanks',
+    data: () => ({
+    }),
     computed: {
       avatarSize: function () {
         if (this.$vuetify.breakpoint.lgAndUp) {
           return 250
         }
         if (this.$vuetify.breakpoint.mdAndUp) {
-          return 200
+          return 150
         }
         if (this.$vuetify.breakpoint.smAndUp) {
           return '20vw'
         }
-        return '60vw'
+        return '50vw'
       },
-    },
-    data: () => ({
-      
-    }),
+    }
   }
 </script>

@@ -4,7 +4,6 @@
     <v-form
       ref="form"
       v-model="orderDetailsAreValid"
-      lazy-validation
       :update="updateOrderDetails()"
     >
       <v-row dense>
@@ -230,18 +229,7 @@
       </v-row>
     </v-form>
     
-    <v-divider class="mt-6"></v-divider>
-    <v-row dense class="my-3">
-      <v-col cols="12" md="12">
-        <v-checkbox  
-          inset 
-          v-model="termsOfServiceChecked" 
-          label="Ich habe die AGB gelesen und bin einverstanden."
-          class="ml-2 font-weight-bold primary--text"
-          hide-details
-        ></v-checkbox>
-      </v-col>
-    </v-row>
+    <v-divider class="mt-3"></v-divider>
   </div>
 </template>
 
@@ -256,7 +244,7 @@ import { mapGetters, mapMutations } from 'vuex'
       orderDetailsAreValid: true,
       orderDetails: {
         identity: {
-          salutation: 'Herr',
+          salutation: '',
           firstName: 'Max',
           lastName: 'Mustermannn',
           company: 'MV Entenhausen',
