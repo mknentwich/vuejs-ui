@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col cols="12">
-      <v-sheet rounded="lg" color="grey lighten-3" class="pa-2">
+      <v-sheet rounded="lg" class="pa-2">
         <v-row class="align-center justify-center" dense>
           <v-col cols="auto">
             <v-img
@@ -12,7 +12,7 @@
             ></v-img>
           </v-col>
           <v-col cols="auto">
-            <h1 class="text-h4 font-weight-bold primary--text">
+            <h1 class="text-h4 font-weight-bold primary--text mb-3">
               Noten bestellen
             </h1>
           </v-col>
