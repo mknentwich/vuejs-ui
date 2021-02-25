@@ -33,7 +33,7 @@
         <v-spacer></v-spacer>
         <v-col cols="auto">
           <span class="mr-2 text-h6 primary--text font-weight-black">
-            {{ score.price }},00 €
+            {{ (score.price/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
           </span>
 
           <AddToCartBtn :scoreId="score.id"></AddToCartBtn>

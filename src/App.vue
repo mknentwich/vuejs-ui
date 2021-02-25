@@ -127,7 +127,7 @@
       footerLinks: [
         {
           label: 'Impressum',
-          path: '/imprint',
+          path: '/contact',
           icon: 'mdi-playlist-music-outline'
         },
         {

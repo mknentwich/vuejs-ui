@@ -8,6 +8,7 @@ import Confirm from '../views/shop/ConfirmOrder.vue'
 import Thanks from '../views/shop/Thanks.vue'
 import Contact from '../views/Contact.vue'
 import Biography from '../views/Biography.vue'
+import Terms from '../views/Terms.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/biography',
     name: 'Biography',
     component: Biography
+  },
+  {
+    path: '/terms',
+    name: 'Terms',
+    component: Terms
   },
 ]
 

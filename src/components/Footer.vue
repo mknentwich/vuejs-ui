@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="4">
           <div v-for="link in footerLinks" v-bind:key="link.path" >
-          <v-btn dark class="font-weight-bold" text :to="link.path">
+          <v-btn dark text rounded class="font-weight-bold" :to="link.path">
             {{ link.label }}
           </v-btn>
           </div>

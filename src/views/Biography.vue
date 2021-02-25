@@ -38,6 +38,7 @@
         :key="timelineItem.title"
         color="primary"
         fill-dot
+        small
       >
         <template v-slot:opposite>
           <span class="font-weight-bold primary--text text-h5">{{ timelineItem.title }}</span>

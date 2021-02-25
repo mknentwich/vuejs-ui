@@ -16,14 +16,18 @@
         <div class="text-h6 font-weight-bold pb-4">
           Ihre Bestellung ist eingegangen.
         </div>
-        <v-img
+        <div class="text-h3 font-weight-bold pb-4">
+          Herzlichen <br>
+          Dank!
+        </div>
+        <!-- <v-img
           justify="left"
           :src="require('@/assets/nentwichVerlag_logos_thanks_green_green.svg')"
           height="150"
           width="300"
           class="mt-n5 ml-n8"
           contain
-        ></v-img>
+        ></v-img> -->
         <div class="text-h6 pb-4">
           Rechnung und weitere Informationen erhalten Sie per E-Mail. <br> Bei weiteren Fragen stehe ich jederzeit gerne zur Verfügung.  
         </div>
