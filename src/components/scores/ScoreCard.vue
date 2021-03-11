@@ -13,7 +13,7 @@
       <div class="mb-3">
         {{ score.description }}
       </div>
-      <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold"> für {{ score.instrumentation }} </v-chip>
+      <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold"> für {{ score.groupType }} </v-chip>
       <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold">
         <span class="mr-3"> Schwierigkeit </span>
         <span v-for="n in 5" v-bind:key="n">
@@ -23,21 +23,20 @@
     </v-card-text>
 
     <v-card-actions class="mt-0 secondaryAccentLight">
-      <v-row class="mx-auto no-gutters">
-        <v-col cols="12" md="auto" class="mt-1 ml-1">
-          <v-btn rounded small depressed color="primaryAccent font-weight-bold mr-2" :to="`score/${score.id}`">
-            <v-icon left>mdi-information-variant</v-icon>
-            Details
-          </v-btn>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="auto">
-          <span class="mr-2 text-h6 primary--text font-weight-black">
+      <v-row no-gutters class="align-center">
+        <v-col cols="12" md="auto" class="mx-auto">
+          <span class="px-2 text-h6 primary--text font-weight-black">
             {{ (score.price/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
           </span>
-
+        </v-col>
+        <v-col cols="auto" class="mx-auto">
           <AddToCartBtn :scoreId="score.id"></AddToCartBtn>
-
+        </v-col>
+        <v-col cols="12" md="auto">
+          <v-btn rounded x-small depressed color="primaryAccent font-weight-bold" :to="`score/${score.id}`">
+            <v-icon left small>mdi-information-variant</v-icon>
+            Details
+          </v-btn>
         </v-col>
       </v-row>
     </v-card-actions>

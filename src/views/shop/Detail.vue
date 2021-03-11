@@ -13,7 +13,7 @@
       <ScoreHeader 
         :scoreId="score.id"
         :title="score.title"
-        :instrumentation="score.instrumentation"
+        :groupType="score.groupType"
         :author="score.author"
         :price="score.price"
       ></ScoreHeader>
@@ -22,10 +22,11 @@
       <v-row no-gutters>
         <v-col cols="12" class="mb-6">
           <ScoreMetadata
-          :author="score.author"
-          :description="score.description"
-          :category="score.categoryId"
-          :difficulty="score.difficulty"
+            :author="score.author"
+            :description="score.description"
+            :category="score.categoryId"
+            :difficulty="score.difficulty"
+            :instrumentation="score.instrumentation"
           ></ScoreMetadata>
         </v-col>
         <v-col cols="12">

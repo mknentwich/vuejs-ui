@@ -14,7 +14,7 @@
         <v-list-item-title>
           <v-row no-gutters>
             <v-col cols="auto" class="text-body-1">
-              {{ `${cartItem.title} (${cartItem.instrumentation})` }}
+              {{ `${cartItem.title} (${cartItem.groupType})` }}
             </v-col>
             <v-spacer></v-spacer>
             <v-col cols="auto" class="mr-5">

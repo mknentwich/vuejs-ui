@@ -9,11 +9,11 @@
         <v-icon class="secondary--text mr-4"> mdi-bullseye-arrow </v-icon>
       </v-col>
       <v-col cols="11" sm="auto" class="text-h6 primary--text">
-        für {{ instrumentation }}
+        für {{ groupType }}
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="12" sm="auto" class="font-weight-bold text-h5 primary--text d-flex">
-        <span class="ml-auto">€ {{ price }},00</span>
+        <span class="ml-auto">{{ (price/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €</span>
       </v-col>
       <v-col cols="12" sm="auto" class="ml-3 d-flex">
         <span class="ml-auto">
@@ -32,10 +32,6 @@
     data: () => ({
       
     }),
-    computed: {
-    },
-    methods: {
-    },
     props: {
       scoreId: {
         type: Number
@@ -44,7 +40,7 @@
         type: String,
         default: 'Titel'
       },
-      instrumentation: {
+      groupType: {
         type: String,
         default: 'Besetzung'
       },

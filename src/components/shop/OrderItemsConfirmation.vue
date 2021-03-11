@@ -9,7 +9,7 @@
         {{ orderItem.quantity }} x
       </v-col>
       <v-col cols="7">
-        {{ orderItem.title }} ({{ orderItem.instrumentation }})
+        {{ orderItem.title }} ({{ orderItem.groupType }})
       </v-col>
       <v-col cols="3" class="text-right">
         je {{ (orderItem.price/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €

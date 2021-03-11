@@ -48,7 +48,7 @@
             id: that.scoreId,
             title: json.title,
             price: json.price,
-            instrumentation: json.instrumentation
+            groupType: json.groupType
           }
           this.addToCart(cartItem)
         })
