@@ -87,7 +87,7 @@
           method: 'PUT',
           redirect: 'follow'
         };
-        fetch(`/api/v1/orders/confirmations/${that.orderConfirmation.id}`, requestOptions)
+        fetch(`${process.env.VUE_APP_API_URL}/orders/confirmations/${that.orderConfirmation.id}`, requestOptions)
         .then(response => response.text())
         .then(result => {
           console.log(result)

@@ -280,7 +280,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
       fetchStates: function() {
         var that = this
-        fetch('/api/v1/meta/states/')
+        fetch(process.env.VUE_APP_API_URL + '/meta/states/')
         .then(response => response.json())
         .then(json => {
           that.states = json

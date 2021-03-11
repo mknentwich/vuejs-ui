@@ -42,9 +42,6 @@
 import { mapState } from 'vuex'
   export default {
     name: 'OrderConfirmation',
-    data: () => ({
-      
-    }),
     computed: {
       ...mapState(['orderConfirmation'])
     }

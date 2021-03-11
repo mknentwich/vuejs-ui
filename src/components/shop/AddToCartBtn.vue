@@ -41,7 +41,7 @@
       },
       fetchScoreMetadataAndAddToCart: function() {
         var that = this
-        fetch(`/api/v1/catalogue/scores/${this.scoreId}`)
+        fetch(`${process.env.VUE_APP_API_URL}/catalogue/scores/${this.scoreId}`)
         .then(response => response.json())
         .then(json => {
           let cartItem = {

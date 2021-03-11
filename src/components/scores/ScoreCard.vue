@@ -66,7 +66,7 @@
       updateCartMetadata: function() {
         this.cartItemsMetadata = []
         this.cartItems.forEach(item => {
-          fetch(`api/v1/catalogue/scores/${item.id}`)
+          fetch(`${process.env.VUE_APP_API_URL}/catalogue/scores/${item.id}`)
             .then(response => response.json())
             .then(json => {
               console.log(json)

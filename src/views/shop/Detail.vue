@@ -64,7 +64,7 @@
     methods: {
       fetchScoreById: function (id) {
         var that = this
-        fetch(`/api/v1/catalogue/scores/${id}`)
+        fetch(`${process.env.VUE_APP_API_URL}/catalogue/scores/${id}`)
         .then(response => response.json())
         .then(json => {
           console.log(json)

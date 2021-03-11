@@ -163,7 +163,7 @@
           body: raw,
           redirect: 'follow'
         };
-        fetch('/api/v1/orders', requestOptions)
+        fetch(process.env.VUE_APP_API_URL + '/orders', requestOptions)
         .then(response => response.json())
         .then(result => {
           that.setOrderConfirmation(result)

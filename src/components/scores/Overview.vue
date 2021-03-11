@@ -87,7 +87,7 @@
       ...mapMutations(['addToCart']),
       fetchScores: function() {
         var that = this
-        fetch('/api/v1/catalogue/')
+        fetch(process.env.VUE_APP_API_URL + '/catalogue/')
         .then(response => response.json())
         .then(json => {
           console.log(json)
