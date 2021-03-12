@@ -255,7 +255,7 @@ import { mapGetters, mapMutations } from 'vuex'
             postCode: '7777',
             street: 'Straße',
             streetNumber: '11',
-            stateId: 8
+            stateId: 2
           }
         }
       },

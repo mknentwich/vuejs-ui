@@ -4,6 +4,35 @@
       <v-icon small class="mr-1">mdi-arrow-left</v-icon>
       Bestellung bearbeiten
     </v-btn>
+    <!-- loading dialog popup -->
+    <v-dialog
+      v-model="dialog"
+      persistent
+      width="300"
+    >
+      <v-card
+        color="secondaryAccent"
+        dark
+        rounded="lg"
+      >
+        <v-card-title class="primary--text justify-center">
+          <v-img
+          :src="require('@/assets/nentwichVerlag_logos_color_noFill.svg')"
+          height="100"
+          width="250"
+          contain
+        ></v-img>
+          {{ dialogMsg }}
+        </v-card-title>
+        <v-card-text>
+          <v-progress-linear
+            indeterminate
+            color="primary"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <!-- show error messsage in case no order confirmation is present -->
     <v-row v-if="!Object.keys(orderConfirmation).length">
       <v-col cols="12">
@@ -74,15 +103,21 @@
     name: 'ConfirmOrder',
     components: { OrderItemsConfirmation, OrderDataConfirmation },
     data: () => ({
+      dialog: false,
+      dialogMsg: ''
     }),
     computed: {
       ...mapState(['orderConfirmation'])
     },
     methods: {
       ...mapMutations(['resetCartAndOrderConfirmation']),
+      showDialog: function(msg) {
+        this.dialogMsg = msg
+        this.dialog = true
+      },
       confirmOrder: function() {
         var that = this
-
+        that.showDialog('Ihre Bestellung wird übermittelt...')
         var requestOptions = {
           method: 'PUT',
           redirect: 'follow'
@@ -94,7 +129,10 @@
           that.resetCartAndOrderConfirmation()
           that.$router.push('/shop/thanks')
           })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          this.showDialog('Bei der Übermittlung ist ein Fehler aufgetreten. Bitte aktualisieren Sie die Seite und starten Sie erneut!')
+          console.log(error)
+          });
       },
     }
   }
