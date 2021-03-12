@@ -3,7 +3,7 @@
    <v-col cols="12" md="4" class="pa-4" v-for="(link, i) in links" v-bind:key="i">
       <v-hover>
         <template v-slot="{ hover }">
-          <v-card @click="goTo(link.to)" flat tile color="secondaryAccentLight" :class="hover ? 'box-shadow-hover' : 'box-shadow'">
+          <v-card @click="goTo(link.to)" rounded="lg" flat color="secondaryAccentLight" :class="hover ? 'box-shadow-hover' : 'box-shadow'">
             <v-card-text class="d-flex align-center justify-center flex-column fill-height">
               <v-icon 
                 v-if="link.icon"

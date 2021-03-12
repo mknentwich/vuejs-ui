@@ -5,62 +5,56 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    testScores: [
-      {
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        id: 1,
-        category: 'Polka',
-        difficulty: 2,
-        instrumentation: 'Blasorchester',
-        price: 49,
-        title: 'Eine letzte Runde',
-      },
-      {
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        id: 2,
-        category: 'Polka',
-        difficulty: 4,
-        instrumentation: 'Ensemble',
-        price: 39,
-        title: 'Eine letzte Runde',
-      }
-    ],
-    cartItems: []
+    cartItems: [],
+    orderDetails: {},
+    optionalDeliveryAddress: {},
+    orderDetailsAreValid: false,
+    orderConfirmation: {}
   },
   getters: {
-    getTestScores: state => {
-      return state.testScores
-    },
-    getCartItems: state => {
-      return state.cartItems
+    getCartItemsIdAndQuantity: state => {
+      let cartItems = []
+      state.cartItems.forEach( (cartItem) => {
+        cartItems.push({id: cartItem.id, quantity: cartItem.quantity})
+      })
+      return cartItems
     },
     getScoreById: (state) => (id) => {
       return state.testScores.find(item => item.id === id)
     },
-    getScorePriceById: (state) => (id) => {
-      return (state.testScores.find(item => item.id === id)).price
-    },
-    getCartTotal: (state, getters) => {
+    getCartTotal: (state) => {
       let total = 0
       state.cartItems.forEach( (cartItem) => {
-        total += cartItem.quantity * getters.getScorePriceById(cartItem.id)
+        total += cartItem.quantity * cartItem.price
       })
       return total
+    },
+    getOrderDetails: (state, getters) => {
+      let orderDetailsObject = state.orderDetails
+      if (state.optionalDeliveryAddress) {
+        orderDetailsObject.deliveryAddress = state.optionalDeliveryAddress
+      }
+      orderDetailsObject.items = getters.getCartItemsIdAndQuantity
+      return orderDetailsObject
     }
   },
   mutations: {
-    addToCart: function(state, id) {
-      if (!state.cartItems.filter(item => item.id === id).length) {
+    addToCart: function(state, submittedCartItem) {
+      if (!state.cartItems.filter(item => item.id === submittedCartItem.id).length) {
         // if item is not yet in cart, add new line item
-        let cartItem = { quantity: 1, id: id }
-        state.cartItems.push(cartItem)
+        submittedCartItem.quantity = 1
+        state.cartItems.push(submittedCartItem)
       } else {
         // if item already is in cart, increase quantity by one
-        let cartItemRef = state.cartItems.filter(item => item.id === id)
+        let cartItemRef = state.cartItems.filter(item => item.id === submittedCartItem.id)
         Vue.set(cartItemRef[0], 'quantity', cartItemRef[0].quantity + 1)
       } 
     },
-    removeFromCart: function(state, id) {
+    incrementQuantityOfCartItem: function(state, id) {
+      let cartItemRef = state.cartItems.filter(item => item.id === id)
+      Vue.set(cartItemRef[0], 'quantity', cartItemRef[0].quantity + 1)
+    },
+    decrementQuantityOrRemoveCartItem: function(state, id) {
       // check if item is in cart
       let index = state.cartItems.findIndex(item => item.id === id)
 
@@ -75,6 +69,22 @@ export default new Vuex.Store({
           state.cartItems.splice(index ,1)
         }
       }
+    },
+    setOrderDetails: function(state, orderDetails) {
+      state.orderDetails = orderDetails
+    },
+    setOptionalDeliveryAddress: function(state, optionalDeliveryAdress) {
+      state.optionalDeliveryAddress = optionalDeliveryAdress
+    },
+    setOrderDetailsAreValid: function(state, orderDetailsAreValid) {
+      state.orderDetailsAreValid = orderDetailsAreValid
+    },
+    setOrderConfirmation: function(state, orderConfirmation) {
+      state.orderConfirmation = orderConfirmation
+    },
+    resetCartAndOrderConfirmation: function(state) {
+      state.cartItems = []
+      state.orderConfirmation = []
     }
   },
   actions: {

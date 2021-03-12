@@ -14,7 +14,7 @@
 
       <v-col cols="12" sm="8" class="primary--text">
         <div class="text-h6 font-weight-bold pb-4">
-          Grias di, ich bin
+          Wilkommen auf der Website von
         </div>
         <v-img
           justify="left"
@@ -25,7 +25,7 @@
           contain
         ></v-img>
         <div class="text-h6 pb-4">
-          Posaunist, Musiker und Vollblut-Musikant <br> aus Leopolsdorf im Marchfeld.  
+          Musiker, Komponist, Arrangeur, Dirigent und Pädagoge <br> aus Leopolsdorf im Marchfeld.  
         </div>
       </v-col>
       

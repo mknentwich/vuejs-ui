@@ -13,7 +13,7 @@
       <ScoreHeader 
         :scoreId="score.id"
         :title="score.title"
-        :instrumentation="score.instrumentation"
+        :groupType="score.groupType"
         :author="score.author"
         :price="score.price"
       ></ScoreHeader>
@@ -22,14 +22,15 @@
       <v-row no-gutters>
         <v-col cols="12" class="mb-6">
           <ScoreMetadata
-          :author="score.author"
-          :description="score.description"
-          :category="score.category"
-          :difficulty="score.difficulty"
+            :author="score.author"
+            :description="score.description"
+            :category="score.categoryId"
+            :difficulty="score.difficulty"
+            :instrumentation="score.instrumentation"
           ></ScoreMetadata>
         </v-col>
         <v-col cols="12">
-          <Player></Player>
+          <Player :scoreId="score.id"></Player>
         </v-col>
       </v-row>
       
@@ -61,12 +62,18 @@
       }
     },
     methods: {
-      getScoreById: function (id) {
-        return this.$store.getters.getScoreById(id)
+      fetchScoreById: function (id) {
+        var that = this
+        fetch(`${process.env.VUE_APP_API_URL}/catalogue/scores/${id}`)
+        .then(response => response.json())
+        .then(json => {
+          console.log(json)
+          that.score = json
+        })
       }
     },
     created() {
-      this.score = this.getScoreById(Number(this.$route.params.scoreId))
+      this.score = this.fetchScoreById(this.$route.params.scoreId)
     },
   }
 </script>

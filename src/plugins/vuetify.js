@@ -17,7 +17,9 @@ export default new Vuetify({
             primaryAccentLightAlt: '#eaeaea',
             secondaryAccent: '#ECE6DD',
             secondaryAccentLight: '#f8f5f2',
-            highlightDark: '#3f3432'
+            highlightDark: '#3f3432',
+            caution: '#ed9220',
+            cautionContrast: '#6d430e'
         }
       }
     }

@@ -19,8 +19,13 @@
     components: {
         VuetifyAudio: () => import('vuetify-audio'),
     },
+    props: {
+      scoreId: Number
+    },
     data: () => ({
-        file: 'http://www.hochmuth.com/mp3/Boccherini_Concerto_478-1.mp3',
+        file() {
+          return `${process.env.VUE_APP_API_URL}/assets/scores/${this.scoreId}/audio`
+        }
     }),
     computed: {
     },

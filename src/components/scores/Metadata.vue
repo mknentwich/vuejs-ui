@@ -18,13 +18,22 @@
         {{ description }}
       </v-col>
     </v-row>
-    <!-- category -->
+    <!-- category (if necessary fetch category string by id)
     <v-row>
       <v-col cols="1" class="text-subtitle-2 primary--text">
         <v-icon class="secondary--text"> mdi-bookmark </v-icon>
       </v-col>
       <v-col cols="11" class="text-body-1 primary--text">
         {{ category }}
+      </v-col>
+    </v-row> -->
+    <!-- instrumentation -->
+    <v-row>
+      <v-col cols="1" class="text-subtitle-2 primary--text">
+        <v-icon class="secondary--text"> mdi-book-multiple </v-icon>
+      </v-col>
+      <v-col cols="11" class="text-body-1 primary--text">
+        {{ instrumentation }}
       </v-col>
     </v-row>
     <!-- difficulty -->
@@ -59,10 +68,6 @@
         type: String,
         default: 'Autor'
       },
-      category: {
-        type: String,
-        default: 'nicht klassifiziert'
-      },
       description: {
         type: String,
         default: 'keine Beschreibung'
@@ -70,6 +75,10 @@
       difficulty: {
         type: Number,
         default: 0
+      },
+      instrumentation: {
+        type: String,
+        default: 'Besetzungsliste'
       },
     },
   }

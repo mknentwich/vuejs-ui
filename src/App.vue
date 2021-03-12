@@ -71,7 +71,7 @@
       <v-container>
           <v-row no-gutters>
             <v-spacer></v-spacer>
-            <v-col :cols="$vuetify.breakpoint.xs ? 12 : 10" v-if="$route.name !== 'Checkout'">
+            <v-col :cols="$vuetify.breakpoint.xs ? 12 : 10" v-if="!$route.meta.hideCart === true">
               <v-scale-transition>
               <Cart/>
               </v-scale-transition>
@@ -79,7 +79,7 @@
             <v-spacer></v-spacer>
           </v-row>
           <v-row no-gutters>
-            <v-col cols="12">
+            <v-col cols="12" class="pt-2">
               <!-- <transition name="component-fade" mode="out-in"> -->
               <router-view></router-view>
               <!-- </transition> -->
@@ -127,7 +127,7 @@
       footerLinks: [
         {
           label: 'Impressum',
-          path: '/imprint',
+          path: '/contact',
           icon: 'mdi-playlist-music-outline'
         },
         {
