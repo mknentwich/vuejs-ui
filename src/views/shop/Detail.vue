@@ -36,7 +36,7 @@
       
     </v-col>
     <v-col cols="12" md="5">
-      <Carousel></Carousel>
+      <PdfView :scoreId="score.id"></PdfView>
     </v-col>
   </v-row>
   </v-container>
@@ -46,12 +46,12 @@
   import ScoreHeader from '@/components/scores/Header.vue'
   import ScoreMetadata from '@/components/scores/Metadata.vue'
   import Player from '@/components/scores/Player.vue'
-  import Carousel from '@/components/scores/Carousel.vue'
+  import PdfView from '@/components/scores/PdfView.vue'
 
   export default {
     name: 'ShopHome',
     components: {
-      ScoreHeader, ScoreMetadata, Player, Carousel
+      ScoreHeader, ScoreMetadata, Player, PdfView
     },
     data: () => ({
       score: {}

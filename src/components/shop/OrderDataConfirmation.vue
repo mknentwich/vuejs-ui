@@ -36,6 +36,14 @@
     <v-row no-gutters v-if="orderConfirmation.deliveryAddress">
       <v-col cols="12" class="ml-4">
         <div>
+          {{ orderConfirmation.identity.salutation }}
+        </div>
+        <div>
+          {{ orderConfirmation.identity.firstName }} 
+          {{ orderConfirmation.identity.lastName }} 
+          ({{ orderConfirmation.identity.company}})
+        </div>
+        <div>
           {{ orderConfirmation.deliveryAddress.street }}
           {{ orderConfirmation.deliveryAddress.streetNumber }}
         </div>
