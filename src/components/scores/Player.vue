@@ -7,7 +7,7 @@
     <v-row class="align-center px-2">
 
       <v-col cols="12" sm="12" class="d-flex">
-        <vuetify-audio class="flex-grow-1" :file="file" color="primary" :ended="audioFinish" flat></vuetify-audio>
+        <vuetify-audio class="flex-grow-1" :file="file" color="primary" flat></vuetify-audio>
       </v-col>
     </v-row>
     </v-card-text>
@@ -22,12 +22,10 @@
     props: {
       scoreId: Number
     },
-    data: () => ({
-        file() {
-          return `${process.env.VUE_APP_API_URL}/assets/scores/${this.scoreId}/audio`
-        }
-    }),
     computed: {
+      file: function() {
+        return `${process.env.VUE_APP_API_URL}/assets/scores/${this.scoreId}/audio` 
+      }
     },
     methods: {
     }
