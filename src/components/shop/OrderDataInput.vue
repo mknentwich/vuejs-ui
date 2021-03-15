@@ -245,17 +245,17 @@ import { mapGetters, mapMutations } from 'vuex'
       orderDetails: {
         identity: {
           salutation: '',
-          firstName: 'Max',
-          lastName: 'Mustermannn',
-          company: 'MV Entenhausen',
-          email: 'max@mail.com',
-          telephone: '036658236',
+          firstName: '',
+          lastName: '',
+          company: '',
+          email: '',
+          telephone: '',
           address: {
-            city: 'Entenhausen',
-            postCode: '7777',
-            street: 'Straße',
-            streetNumber: '11',
-            stateId: 2
+            city: '',
+            postCode: '',
+            street: '',
+            streetNumber: '',
+            stateId: null
           }
         }
       },
