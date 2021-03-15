@@ -12,7 +12,9 @@
         <div>
           {{ orderConfirmation.identity.firstName }} 
           {{ orderConfirmation.identity.lastName }} 
-          ({{ orderConfirmation.identity.company}})
+          <span v-if="orderConfirmation.identity.company">
+            ({{ orderConfirmation.identity.company}})
+          </span>
         </div>
         <div>
           {{ orderConfirmation.identity.address.street }} {{ orderConfirmation.identity.address.streetNumber }}
@@ -59,6 +61,30 @@
     <v-row v-else no-gutters>
       <v-col class="font-weight-bold ml-4">
         <v-icon>mdi-checkbox-marked</v-icon> Lieferadresse identisch
+      </v-col>
+    </v-row>
+    <v-divider class="my-2"></v-divider>
+
+    <!-- contact details -->
+    <v-row no-gutters>
+      <v-col cols="12" class="text-overline primary--text font-weight-bold">
+        Kontaktdetails
+      </v-col>
+    </v-row>
+    <v-row no-gutters class="ml-4">
+      <v-col cols="auto" class="mr-2 font-weight-bold">
+        E-Mail
+      </v-col>
+      <v-col cols="auto">
+        {{ orderConfirmation.identity.email }}
+      </v-col>
+    </v-row>
+    <v-row no-gutters v-if="orderConfirmation.identity.telephone" class="ml-4">
+      <v-col cols="auto" class="mr-2 font-weight-bold">
+        Telefonnummer
+      </v-col>
+      <v-col cols="auto">
+        {{ orderConfirmation.identity.telephone }}
       </v-col>
     </v-row>
   </div>

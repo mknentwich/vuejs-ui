@@ -23,7 +23,7 @@
         <span class="text-caption">{{ orderConfirmation.identity.address.state.name }}</span>
       </v-col>
       <v-col cols="4" class="text-right font-weight-black">
-        {{ (orderConfirmation.identity.address.state.zone.shipping/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
+        {{ (orderConfirmation.shippingCosts/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
       </v-col>
       <v-divider></v-divider>
     </v-row>

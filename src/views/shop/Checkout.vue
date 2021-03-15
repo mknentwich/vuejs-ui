@@ -167,7 +167,7 @@
         .then(response => response.json())
         .then(result => {
           that.setOrderConfirmation(result)
-
+          console.log(result)
           that.placeOrderInProgress = false
           that.$router.push('/shop/confirmOrder')
         })
