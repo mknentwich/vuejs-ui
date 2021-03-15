@@ -1,6 +1,5 @@
 # mknentwich-ui
-Public frontend for Markus Nentwich's website. This web-app provides among others ways to place orders using the [Helicon](https://github.com/mknentwich/helicon) backend.  
-
+Public frontend for Markus Nentwich's website. This web-app provides among others ways to place orders using the [Helicon](https://github.com/mknentwich/helicon) backend.
 ## Project setup
 ```
 yarn install
@@ -10,7 +9,7 @@ yarn install
 ```
 yarn serve
 ```
-* configure api url for development in [.env](.env) file*
+* configure api url for development in [.env](.env) file *
 ### Compiles and minifies for production
 ```
 yarn build
