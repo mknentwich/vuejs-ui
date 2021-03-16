@@ -9,12 +9,12 @@ yarn install
 ```
 yarn serve
 ```
-* configure api url for development in [.env](.env) file *
+configure api url for development in [.env](.env) file
 ### Compiles and minifies for production
 ```
 yarn build
 ```
-* configure api url for production in [.env.production](.env.production) file *
+configure api url for production in [.env.production](.env.production) file
 ### Lints and fixes files
 ```
 yarn lint
