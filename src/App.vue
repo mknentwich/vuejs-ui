@@ -80,9 +80,7 @@
           </v-row>
           <v-row no-gutters>
             <v-col cols="12" class="pt-2">
-              <!-- <transition name="component-fade" mode="out-in"> -->
               <router-view></router-view>
-              <!-- </transition> -->
             </v-col>
           </v-row>
       </v-container>
@@ -99,6 +97,15 @@
     components: { Cart, Footer },
     props: {
       source: String,
+    },
+    metaInfo: {
+      title: 'Markus Nentwich',
+      Keywords: 'Markus Nentwich, Eine letzte Runde, Viera Blech, Polka, Musik, Blasmusik, Noten, Posaune, Webshop, Verlag',
+      description: 'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.',
+      abstract: 'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.',
+      robots: 'INDEX,FOLLOW',
+      revisit: 'after 5 days',
+      language: 'Deutsch'
     },
     data: () => ({
       drawer: false,
@@ -146,13 +153,6 @@
 }
 .v-toolbar__content, .v-toolbar__extension {
 	padding: 0px !important;
-}
-.component-fade-enter-active, .component-fade-leave-active {
-  transition: opacity .3s ease;
-}
-.component-fade-enter, .component-fade-leave-to
-/* .component-fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 .container {
   max-width: 1400px;
