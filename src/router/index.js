@@ -9,8 +9,10 @@ import Thanks from '../views/shop/Thanks.vue'
 import Contact from '../views/Contact.vue'
 import Biography from '../views/Biography.vue'
 import Terms from '../views/Terms.vue'
+import VueMeta from 'vue-meta'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta)
 
 const routes = [
   {

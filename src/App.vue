@@ -98,14 +98,16 @@
     props: {
       source: String,
     },
-    metaInfo: {
-      title: 'Markus Nentwich',
-      Keywords: 'Markus Nentwich, Eine letzte Runde, Viera Blech, Polka, Musik, Blasmusik, Noten, Posaune, Webshop, Verlag',
-      description: 'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.',
-      abstract: 'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.',
-      robots: 'INDEX,FOLLOW',
-      revisit: 'after 5 days',
-      language: 'Deutsch'
+    metaInfo() {
+        return { 
+            title: 'Markus Nentwich',
+            meta: [
+                { name: 'description', content:  'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.'},
+                { name: 'abstract', content:  'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.'},
+                { name: 'keywords', content:  'Markus Nentwich, Eine letzte Runde, Viera Blech, Polka, Musik, Blasmusik, Noten, Posaune, Webshop, Verlag'},
+                { name: 'robots', content: 'index,follow'} 
+            ]
+        }
     },
     data: () => ({
       drawer: false,
