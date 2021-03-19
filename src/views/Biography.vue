@@ -6,7 +6,7 @@
         <v-col cols="12" sm="3" justify="center" class="d-flex">
           <v-avatar :size="avatarSize" class="mx-auto">
             <v-img
-              :src="require('@/assets/nentwich_portrait.webp')"
+              :src="require('@/assets/nentwich_portrait.jpg')"
               alt="Image of Markus Nentwich"
               position="top"
             ></v-img>
@@ -50,6 +50,25 @@
         </v-card>
       </v-timeline-item>
     </v-timeline>
+    <!-- reference to contact -->
+    <v-sheet rounded="lg" color="primaryAccent" class="pa-4 mb-4">
+      <v-row class="align-center">
+        <v-spacer></v-spacer>
+        <v-col cols="12" sm="6" justify="center" class="text-right">
+          <div class="text-h5 font-weight-bold primary--text">
+            Noch Fragen?
+          </div>
+        </v-col>
+
+        <v-col cols="12" sm="6">
+          <v-btn to="/contact" depressed rounded x-large class="primary font-weight-bold">
+            <v-icon left>mdi-message-text-outline</v-icon>
+            Kontakt aufnehmen
+          </v-btn>
+        </v-col>
+        
+      </v-row>
+    </v-sheet>
   </div>
 </template>
 <script>
@@ -58,27 +77,27 @@
       timelineItems: [
         {
           title: 'Anfänge',
-          text: 'Meinen ersten Trompeten- und Posaunenunterricht erhielt ich mit fünf Jahren in der örtlichen Musikschule bei meinem Vater Felix. Nach einigen Jahren bei Mag. Reinhard Stöckl und einem Jahr bei Thomas Zsivkovits begann ich 2010 mit dem Vorbereitungslehrgang an der Universität für Musik und darstellende Kunst Wien bei Prof. Otmar Gaiswinkler.'
+          text: 'Seinen ersten Trompeten- und Posaunenunterricht erhielt Markus mit fünf Jahren in der örtlichen Musikschule bei seinem Vater Felix. Daraufhin war er einige Jahre im Unterricht bei Reinhard Stöckl und ein Jahr bei Thomas Zsivkovits. 2010 startete er den Vorbereitungslehrgang an der Universität für Musik und darstellende Kunst Wien bei Prof. Otmar Gaiswinkler.'
         },
         {
           title: 'Schulzeit & danach',
-          text: 'Nach der Matura (Abitur) im Musikgymnasium Wien begann der Präsenzdienst bei der Gardemusik Wien, wo sich auch die Powerkryner gründeten, bei denen ich Gründungsmitglied bin.'
+          text: 'Nach Absolvierung der Matura (Abitur) im Musikgymnasium Wien trat er den Präsenzdienst bei der Gardemusik Wien an. Dort entstanden auch die Powerkryner, für die Markus zahlreiche Arrangements schrieb.'
         },
         {
           title: 'Studium',
-          text: 'Seitdem studiere ich Konzertfach und IGP Posaune bei Prof. Otmar Gaiswinkler, Prof. Dietmar Küblböck und Erik Hainzl und Jazzposaune bei Prof. Leonhard Paul mit vielleicht baldigem Abschluss.'
+          text: '2013 begann er das Diplomstudium Konzertfach Posaune, 2014 folgte das Studium Instrumental- und Gesangspädagogik bei Prof. Otmar Gaiswinkler, Prof. Dietmar Küblböck und Erik Hainzl. Beide Studien schloss er 2020 ab. 2015 kam das Jazzposaunenstudium bei Leonhard Paul dazu, das er voraussichtlich 2021 abschließen wird.'
         },
         {
           title: 'Auftritte',
-          text: 'Auftritte (mit Powerkryner, Vienna Sound Club, …​) führten mich nach Österreich, Deutschland, Italien, Frankreich, Schweiz, Japan, Dubai, Hongkong, Singapur, u.v.m.'
+          text: 'Unzählige Auftritte (mit Powerkryner, Vienna Sound Club, …) in Österreich, Deutschland, Italien, Frankreich, Schweiz, Japan, Dubai, Hongkong, Singapur u.v.m.'
         },
         {
           title: 'VIERA BLECH',
-          text: 'Seit 2020 bin ich fixes Mitglied beim VIERA BLECH.'
+          text: 'Seit 2020 ist Markus fixes Mitglied beim VIERA BLECH.'
         },
         {
           title: 'Sonstiges',
-          text: 'Neben Unterrichtstätigkeit in den Musikschulen Deutsch Wagram und Groß Enzersdorf bin ich vor Allem als Komponist und Arrangeur für verschiedenste Besetzungen gefragt: ORF Allstars Band, da Blechhauf’n, VIERA BLECH, Kaiser Musikanten, Weinviertler Mährische Musikanten, …​'
+          text: 'Neben Unterrichtstätigkeiten an den Musikschulen Deutsch Wagram und Groß-Enzersdorf ist er vor allem als Komponist und Arrangeur für verschiedenste Besetzungen gefragt: ORF Allstars Band, da Blechhauf’n, VIERA BLECH, Kaiser Musikanten, Weinviertler Mährische Musikanten, ... Auch als Aufnahmeleiter oder als Dozent bei Workshops ist er gern gesehen.'
         },
       ]
     }),
