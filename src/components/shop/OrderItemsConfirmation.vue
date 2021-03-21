@@ -20,7 +20,7 @@
       <v-col cols="8" >
         <v-icon class="mr-2">mdi-truck</v-icon>
         <span class="font-weight-black mr-2">Liefergebühr</span>
-        <span class="text-caption">{{ orderConfirmation.identity.address.state.name }}</span>
+        <span class="text-caption">{{ orderConfirmation.deliveryAddress.state.name }}</span>
       </v-col>
       <v-col cols="4" class="text-right font-weight-black">
         {{ (orderConfirmation.shippingCosts/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €
