@@ -1,45 +1,5 @@
 <template>
   <v-row no-gutters>
-    <v-col cols="12">
-      <v-sheet rounded="lg" class="pa-2">
-        <v-row class="align-center justify-center" dense>
-          <v-col cols="auto">
-            <v-img
-              :src="require('@/assets/nentwichVerlag_logos_color.svg')"
-              height="90"
-              width="200"
-              contain
-            ></v-img>
-          </v-col>
-          <v-col cols="auto">
-            <h1 class="text-h4 font-weight-bold primary--text mb-3">
-              Noten bestellen
-            </h1>
-          </v-col>
-          <!-- Filter functionality not yet implemented 
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            <v-row dense class="align-center">
-              <v-col cols="auto">
-                <v-icon color="primary">mdi-filter</v-icon>
-              </v-col>
-              <v-col cols="auto">
-                <v-chip 
-                  v-for="category in allCategories" 
-                  v-bind:key="category.id"
-                  :color="selectedCategories.includes(category.id) ? 'primary' : 'primaryAccent'"
-                  @click="addOrRemoveFromSelectedCategories(category.id)"
-                  class="font-weight-bold mx-1"
-                  link
-                > 
-                  {{ category.name }}
-                </v-chip>
-              </v-col>
-            </v-row>
-          </v-col> -->
-        </v-row>
-      </v-sheet>
-    </v-col>
     <!-- progress bar to indicate loading -->
     <v-col cols="12" v-if="loading">
       <div class="text-body-2 primary--text text-center">
@@ -75,8 +35,7 @@
 <script>
   import ScoreCard from '@/components/scores/ScoreCard.vue'
   import {
-    mapMutations,
-    mapState
+    mapMutations
   } from 'vuex'
 
   export default {
@@ -86,12 +45,7 @@
       loading: false,
       scores: [],
       catalogue: [],
-      allCategories: [],
-      selectedCategories: []
     }),
-    computed: {
-      ...mapState(['testScores'])
-    },
     methods: {
       ...mapMutations(['addToCart']),
       fetchScores: function() {
@@ -102,23 +56,8 @@
         .then(json => {
           that.loading = false
           that.catalogue = json.children
-          that.setAllCategories()
         })
       },
-      setAllCategories: function() {
-        this.catalogue.forEach(function(category) {
-          this.allCategories.push({id: category.id, name: category.name})
-          // by default all categories are to be shown
-          this.selectedCategories.push(category.id)
-        }, this);
-      },
-      addOrRemoveFromSelectedCategories: function(id) {
-        if (this.selectedCategories.includes(id)) {
-          this.selectedCategories.splice(this.selectedCategories.indexOf(id), 1)
-        } else {
-          this.selectedCategories.push(id)
-        }
-      }
     },
     created() {
       this.fetchScores()

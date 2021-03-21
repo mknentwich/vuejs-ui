@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <NavigationDrawer :items="navItems" />
+    <NavigationDrawer :items="navDrawerItems" />
     <AppBar :items="navItems" />
 
     <v-main>
@@ -15,7 +15,7 @@
             <v-spacer></v-spacer>
           </v-row>
           <v-row no-gutters>
-            <v-col cols="12" class="pt-2">
+            <v-col cols="12" class="">
               <router-view></router-view>
             </v-col>
           </v-row>
@@ -82,7 +82,12 @@
           icon: 'mdi-email'
         }
       ]
-    })
+    }),
+    computed: {
+      navDrawerItems: function() {
+        return this.navItems.concat(this.footerLinks)
+      }
+    },
   }
 </script>
 

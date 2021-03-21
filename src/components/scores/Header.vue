@@ -3,12 +3,16 @@
     <!-- decoration dividers to symbolize stave -->
     <v-divider v-for="n in 5" v-bind:key="n" class="mb-2"></v-divider>
     
-    <h1 class="text-h3 mt-n12 primary--text">{{ title }}</h1>
+    <div class="mt-n12 primary--text">
+      <h1 :class="{'text-h3': $vuetify.breakpoint.mdAndUp, 'text-h5': $vuetify.breakpoint.smAndDown}" >
+        {{ title }}
+      </h1>
+    </div>
     <v-row class="mt-4 align-center justify-center" no-gutters>
-      <v-col cols="1" sm="auto" class="text-h6 primary--text">
-        <v-icon class="secondary--text mr-4"> mdi-bullseye-arrow </v-icon>
+      <v-col cols="auto" class="text-h6 primary--text pr-2">
+        <v-icon class="secondary--text"> mdi-bullseye-arrow </v-icon>
       </v-col>
-      <v-col cols="11" sm="auto" class="text-h6 primary--text">
+      <v-col cols="auto" class="text-h6 primary--text">
         für {{ groupType }}
       </v-col>
       <v-spacer></v-spacer>

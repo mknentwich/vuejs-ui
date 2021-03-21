@@ -16,7 +16,7 @@
     <v-divider></v-divider>
 
     <v-list nav>
-      <v-list-item link v-for="item in items" v-bind:key="item.path" :to="item.path">
+      <v-list-item link v-for="item in items" v-bind:key="item.label" :to="item.path">
         <v-list-item-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-action>

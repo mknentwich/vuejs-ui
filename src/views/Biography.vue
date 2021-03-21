@@ -1,9 +1,9 @@
 <template>
   <div class="about">
     <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
-      <v-row class="align-center">
+      <v-row class="align-center" no-gutters>
         <v-spacer></v-spacer>
-        <v-col cols="12" sm="3" justify="center" class="d-flex">
+        <v-col cols="12" sm="3" justify="center" class="d-flex pa-2">
           <v-avatar :size="avatarSize" class="mx-auto">
             <v-img
               :src="require('@/assets/nentwich_portrait.jpg')"
@@ -25,7 +25,7 @@
             class="mt-n6 ml-n3"
             contain
           ></v-img>
-          <div class="text-h6 pb-4">
+          <div class="text-h6">
             mein Name.  
           </div>
         </v-col>
@@ -54,13 +54,13 @@
     <v-sheet rounded="lg" color="primaryAccent" class="pa-4 mb-4">
       <v-row class="align-center">
         <v-spacer></v-spacer>
-        <v-col cols="12" sm="6" justify="center" class="text-right">
+        <v-col cols="12" sm="6" justify="center" :class="{'text-right': $vuetify.breakpoint.mdAndUp, 'text-center': $vuetify.breakpoint.smAndDown}">
           <div class="text-h5 font-weight-bold primary--text">
             Noch Fragen?
           </div>
         </v-col>
 
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6" :class="{'text-left': $vuetify.breakpoint.mdAndUp, 'text-center': $vuetify.breakpoint.smAndDown}">
           <v-btn to="/contact" depressed rounded x-large class="primary font-weight-bold">
             <v-icon left>mdi-message-text-outline</v-icon>
             Kontakt aufnehmen
@@ -112,7 +112,7 @@
         if (this.$vuetify.breakpoint.smAndUp) {
           return '20vw'
         }
-        return '60vw'
+        return '40vw'
       },
     },
   }

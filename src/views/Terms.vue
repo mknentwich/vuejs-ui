@@ -9,8 +9,8 @@
           contain
         ></v-img>
       </v-col>
-      <v-col cols="auto">
-        <h1 class="text-h4 font-weight-bold primary--text text-center mb-3">Allgemeine Geschäftsbedigungen</h1>
+      <v-col cols="auto" class="text-center mb-3">
+        <h1 class="text-h4 font-weight-bold primary--text">Allgemeine Geschäftsbedigungen</h1>
       </v-col>
     </v-row>
     <v-row>

@@ -1,5 +1,5 @@
 <template>
-  <v-row dense class="pa-6">
+  <v-row no-gutters :class="{'pa-6': $vuetify.breakpoint.mdAndUp, 'pa-2': $vuetify.breakpoint.smAndDown}">
    <v-col cols="12" md="4" class="pa-4" v-for="(link, i) in links" v-bind:key="i">
       <v-hover>
         <template v-slot="{ hover }">
@@ -53,7 +53,6 @@
           to: '/contact'
         }
       ]
-      
     }),
     methods: {
       goTo: function (componentName) {
