@@ -4,7 +4,7 @@
       <!-- fallback -->
       Die PDF-Vorschau wird von Ihrem Browser nicht unterstützt.
     </object>
-      <v-btn class="primary my-4" :href="pdfUrl" target="_blank">
+      <v-btn color="primary" class="my-4" :href="pdfUrl" target="_blank" outlined>
         <v-icon left>mdi-download</v-icon>
         Vorschau-PDF herunterladen
       </v-btn>

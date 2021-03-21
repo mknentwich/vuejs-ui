@@ -32,8 +32,8 @@
         <v-col cols="auto" class="mx-auto">
           <AddToCartBtn :scoreId="score.id"></AddToCartBtn>
         </v-col>
-        <v-col cols="12" md="auto">
-          <v-btn rounded x-small depressed color="primaryAccent font-weight-bold" :to="`score/${score.id}`">
+        <v-col cols="12" md="auto" class="py-1">
+          <v-btn rounded x-small depressed class="primaryAccent font-weight-bold" :to="`score/${score.id}`">
             <v-icon left small>mdi-information-variant</v-icon>
             Details
           </v-btn>

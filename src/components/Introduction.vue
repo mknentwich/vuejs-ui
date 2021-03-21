@@ -1,5 +1,5 @@
 <template>
-  <v-sheet rounded="lg" color="secondaryAccent" class="pa-4">
+  <v-sheet rounded="lg" color="secondaryAccent" :class="{'pa-6 pt-10': $vuetify.breakpoint.mdAndUp, 'pa-4 pt-2': $vuetify.breakpoint.smAndDown}">
     <v-row class="align-center">
       <v-spacer></v-spacer>
       <v-col cols="12" sm="3" justify="center" class="d-flex">
@@ -24,7 +24,7 @@
           class="mt-n6 ml-n3"
           contain
         ></v-img>
-        <div class="text-h6 pb-4">
+        <div class="text-h6">
           Musiker, Komponist, Arrangeur, Dirigent und Pädagoge <br> aus Leopolsdorf im Marchfeld.  
         </div>
       </v-col>
@@ -53,7 +53,7 @@ import Quicklinks from '@/components/Quicklinks.vue'
         if (this.$vuetify.breakpoint.smAndUp) {
           return '20vw'
         }
-        return '60vw'
+        return '45vw'
       },
     },
     data: () => ({

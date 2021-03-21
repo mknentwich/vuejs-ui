@@ -1,72 +1,8 @@
 <template>
   <v-app id="app">
-    <!-- NAVIGATION DRAWER, toDo: outsource to separate component -->
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      disable-resize-watcher
-      color="primary"
-      dark
-    >
-    <v-row justify="center" no-gutters class="pa-6">
-      <v-img
-        height="30px"
-        width="80px"
-        :src="require('@/assets/nentwichVerlag_logos_name_grey_grey.svg')"
-      ></v-img>
-    </v-row>
-      <v-divider></v-divider>
+    <NavigationDrawer :items="navDrawerItems" />
+    <AppBar :items="navItems" />
 
-      <v-list nav>
-        <v-list-item link v-for="item in navItems" v-bind:key="item.path" :to="item.path">
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.label }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <!-- APP BAR, toDo: outsource to separate component -->
-    <v-app-bar
-      app
-      dark
-      :class="$vuetify.breakpoint.mobile ? 'secondaryAccent' : 'app-bar-gradient'"
-      elevation="6"
-      height="100"
-    >
-    <v-container>
-      <v-row no-gutters justify="center" align="center">
-        <v-col cols="1" v-if="$vuetify.breakpoint.mobile">
-          <v-app-bar-nav-icon 
-            class="primary--text mr-4" 
-            @click="drawer = !drawer"
-          ></v-app-bar-nav-icon>
-        </v-col>
-        <v-col cols="11" md="4">
-          <router-link class="justify-center" to="/">
-            <v-img
-              :height="$vuetify.breakpoint.smAndDown ? '10vw' : '10vw'"
-              max-height="60"
-              :width="$vuetify.breakpoint.smAndDown ? '80vw' : '25vw'"
-              :src="require('@/assets/nentwichVerlag_logos_name_green_grey.svg')"
-              class="mr-5"
-            ></v-img>
-          </router-link>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="auto" class="primary pa-4" v-if="!$vuetify.breakpoint.mobile">
-          <v-btn rounded class="font-weight-bold mx-1" text :to="item.path" v-for="item in navItems" v-bind:key="item.path">
-          {{ item.label }}
-        </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-    </v-app-bar>
-
-    <!-- MAIN -->
     <v-main>
       <v-container>
           <v-row no-gutters>
@@ -79,7 +15,7 @@
             <v-spacer></v-spacer>
           </v-row>
           <v-row no-gutters>
-            <v-col cols="12" class="pt-2">
+            <v-col cols="12" class="">
               <router-view></router-view>
             </v-col>
           </v-row>
@@ -92,23 +28,26 @@
 <script>
   import Footer from '@/components/Footer.vue'
   import Cart from '@/components/shop/Cart.vue'
+  import AppBar from '@/components/AppBar.vue'
+  import NavigationDrawer from '@/components/NavigationDrawer.vue'
 
   export default {
-    components: { Cart, Footer },
+    components: { Cart, Footer, AppBar, NavigationDrawer },
     props: {
       source: String,
     },
-    metaInfo: {
-      title: 'Markus Nentwich',
-      Keywords: 'Markus Nentwich, Eine letzte Runde, Viera Blech, Polka, Musik, Blasmusik, Noten, Posaune, Webshop, Verlag',
-      description: 'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.',
-      abstract: 'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.',
-      robots: 'INDEX,FOLLOW',
-      revisit: 'after 5 days',
-      language: 'Deutsch'
+    metaInfo() {
+        return { 
+            title: 'Markus Nentwich',
+            meta: [
+                { name: 'description', content:  'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.'},
+                { name: 'abstract', content:  'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.'},
+                { name: 'keywords', content:  'Markus Nentwich, Eine letzte Runde, Viera Blech, Polka, Musik, Blasmusik, Noten, Posaune, Webshop, Verlag'},
+                { name: 'robots', content: 'index,follow'} 
+            ]
+        }
     },
     data: () => ({
-      drawer: false,
       navItems: [
         {
           label: 'Home',
@@ -143,7 +82,12 @@
           icon: 'mdi-email'
         }
       ]
-    })
+    }),
+    computed: {
+      navDrawerItems: function() {
+        return this.navItems.concat(this.footerLinks)
+      }
+    },
   }
 </script>
 

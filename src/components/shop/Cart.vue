@@ -4,12 +4,12 @@
       <v-expansion-panel class="border">
         <v-expansion-panel-header color="primaryAccent">
           <v-row no-gutters align="center">
-            <v-col cols="12" sm="auto">
+            <v-col cols="12" sm="auto" class="text-center">
               <v-badge
                 left
                 inline
                 color="primary"
-                :content="cartItems.length"
+                :content="numberOfItemsInCart"
                 class="mr-2"
                 transition="scroll-y"
               >
@@ -18,7 +18,7 @@
               <span class="font-weight-bold text-subtitle-1 primary--text">Mein Warenkorb</span>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col cols="12" sm="auto" :class="$vuetify.breakpoint.xsOnly ? 'mt-3' : 'mr-3'">
+            <v-col cols="12" sm="auto" :class="$vuetify.breakpoint.xsOnly ? 'mt-3 text-center' : 'mr-3'">
               <v-btn color="primary" depressed rounded to="/shop/checkout">
                 <v-icon left>mdi-arrow-right</v-icon>
                 zur Kasse
@@ -48,7 +48,14 @@
       
     }),
     computed: {
-      ...mapState(['cartItems', 'getCartTotal'])
+      ...mapState(['cartItems', 'getCartTotal']),
+      numberOfItemsInCart: function() {
+        let result = 0
+        this.cartItems.forEach(item =>
+          result += item.quantity
+        )
+        return result
+      }
     },
     methods: {
       ...mapMutations(['addToCart']),
