@@ -19,7 +19,7 @@
           <v-img
             :height="$vuetify.breakpoint.smAndDown ? '10vw' : '10vw'"
             max-height="60"
-            :width="$vuetify.breakpoint.smAndDown ? '80vw' : '25vw'"
+            :width="logoWidth"
             :src="require('@/assets/nentwichVerlag_logos_name_green_grey.svg')"
             class="mr-5"
           ></v-img>
@@ -45,6 +45,17 @@ import { mapMutations } from 'vuex'
     },
     methods: {
       ...mapMutations(['setDrawerValue'])
+    },
+    computed: {
+      logoWidth: function () {
+        if (this.$vuetify.breakpoint.mdAndUp) {
+          return '60vw'
+        }
+        if (this.$vuetify.breakpoint.smAndUp) {
+          return '40vw'
+        }
+        return '70vw'
+      },
     },
   }
 </script>

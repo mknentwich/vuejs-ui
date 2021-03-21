@@ -14,19 +14,23 @@
 
         <v-divider class="my-2"></v-divider>
         <h2 class="primary--text">{{category.namePlural}}</h2>
-
-        <!-- show list of scores associated w category -->
-        <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in category.scores" v-bind:key="score.id">
-          <ScoreCard :score="score" :categoryName="category.name"></ScoreCard>
-        </v-col>
-        <!-- show sub-categories -->
-        <div v-for="subcategory in category.children" v-bind:key="subcategory.id" rounded="lg">
-          <h3 class="primary--text">{{subcategory.namePlural}}</h3>
-          <!-- show list of scores -->
-          <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in subcategory.scores" v-bind:key="score.id">
-            <ScoreCard :score="score" :categoryName="subcategory.name"></ScoreCard>
+        <v-row>
+          <!-- show list of scores associated w category -->
+          <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in category.scores" v-bind:key="score.id">
+            <ScoreCard :score="score" :categoryName="category.name"></ScoreCard>
           </v-col>
-        </div>
+          <!-- show sub-categories -->
+          <div v-for="subcategory in category.children" v-bind:key="subcategory.id" rounded="lg">
+            <h3 class="primary--text">{{subcategory.namePlural}}</h3>
+            <v-row>
+              <!-- show list of scores -->
+              <v-col class="d-flex align-stretch mx-auto" cols="12" md="4" sm="6" v-for="score in subcategory.scores" v-bind:key="score.id">
+                <ScoreCard :score="score" :categoryName="subcategory.name"></ScoreCard>
+              </v-col>
+            </v-row>
+          </div>
+          <v-spacer></v-spacer>
+        </v-row>
       </div>
     </v-col>
   </v-row>
