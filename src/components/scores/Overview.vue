@@ -40,6 +40,14 @@
         </v-row>
       </v-sheet>
     </v-col>
+    <!-- progress bar to indicate loading -->
+    <v-col cols="12" v-if="loading">
+      <div class="text-body-2 primary--text text-center">
+        Inhalte werde geladen...
+      </div>
+      <v-progress-linear indeterminate class="primary--text">
+      </v-progress-linear>
+    </v-col>
     <v-col cols="12" class="text-center">
       <!-- create list by category -->
       <div v-for="category in catalogue" v-bind:key="category.id" class="text-center mb-6">
@@ -75,6 +83,7 @@
     name: 'Overview',
     components: { ScoreCard },
     data: () => ({
+      loading: false,
       scores: [],
       catalogue: [],
       allCategories: [],
@@ -87,10 +96,11 @@
       ...mapMutations(['addToCart']),
       fetchScores: function() {
         var that = this
+        that.loading = true
         fetch(process.env.VUE_APP_API_URL + '/catalogue/')
         .then(response => response.json())
         .then(json => {
-          console.log(json)
+          that.loading = false
           that.catalogue = json.children
           that.setAllCategories()
         })
@@ -115,12 +125,3 @@
     }
   }
 </script>
-<style scoped>
-.box-shadow {
-  box-shadow: 5px 5px 0px #d5d5d5 !important;
-  height: 100%;
-}
-.no-underline {
-  text-decoration: none !important;
-}
-</style>

@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    drawer: false,
     cartItems: [],
     orderDetails: {},
     optionalDeliveryAddress: {},
@@ -85,6 +86,10 @@ export default new Vuex.Store({
     resetCartAndOrderConfirmation: function(state) {
       state.cartItems = []
       state.orderConfirmation = []
+    },
+    setDrawerValue: function(state, value) {
+      console.log('toggle drawer pressed')
+      state.drawer = value
     }
   },
   actions: {
