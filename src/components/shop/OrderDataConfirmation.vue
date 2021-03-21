@@ -43,7 +43,9 @@
         <div>
           {{ orderConfirmation.identity.firstName }} 
           {{ orderConfirmation.identity.lastName }} 
-          ({{ orderConfirmation.identity.company}})
+          <span v-if="orderConfirmation.identity.company">
+            ({{ orderConfirmation.identity.company}})
+          </span>
         </div>
         <div>
           {{ orderConfirmation.deliveryAddress.street }}
