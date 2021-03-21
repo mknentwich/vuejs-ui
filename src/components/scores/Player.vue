@@ -7,7 +7,10 @@
     <v-row class="align-center px-2">
 
       <v-col cols="12" sm="12" class="d-flex">
-        <vuetify-audio class="flex-grow-1" :file="file" color="primary" flat></vuetify-audio>
+         <audio controls>
+            <source :src="file" type="audio/mp3">
+            Ihr Browser unterstützt die Wiedergabe der Hörprobe leider nicht.
+          </audio> 
       </v-col>
     </v-row>
     </v-card-text>
@@ -16,9 +19,6 @@
 <script>
   export default {
     name: 'Player',
-    components: {
-        VuetifyAudio: () => import('vuetify-audio'),
-    },
     props: {
       scoreId: Number
     },
