@@ -6,7 +6,7 @@
         <v-col cols="12" sm="3" justify="center" class="d-flex pa-2">
           <v-avatar :size="avatarSize" class="mx-auto">
             <v-img
-              :src="require('@/assets/nentwich_portrait.jpg')"
+              :src="require('@/assets/nentwich_portrait_alt.jpg')"
               alt="Image of Markus Nentwich"
               position="top"
             ></v-img>
