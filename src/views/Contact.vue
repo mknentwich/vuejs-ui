@@ -15,7 +15,7 @@
 
       <v-col cols="12" sm="8" class="primary--text">
         <div class="text-h4 font-weight-bold">
-          Markus Nentwich
+          Mag. Markus Nentwich, BA
         </div>
         <!-- address -->
         <v-row class="text-body-1">
