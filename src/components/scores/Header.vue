@@ -4,7 +4,7 @@
     <v-divider v-for="n in 5" v-bind:key="n" class="mb-2"></v-divider>
     
     <div class="mt-n12 primary--text">
-      <h1 :class="{'text-h3': $vuetify.breakpoint.mdAndUp, 'text-h5': $vuetify.breakpoint.smAndDown}" >
+      <h1 :class="{'text-h3 font-weight-bold': $vuetify.breakpoint.mdAndUp, 'text-h5 font-weight-bold': $vuetify.breakpoint.smAndDown}" >
         {{ title }}
       </h1>
     </div>

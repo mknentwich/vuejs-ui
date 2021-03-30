@@ -58,10 +58,13 @@
         fetch(process.env.VUE_APP_API_URL + '/catalogue/')
         .then(response => response.json())
         .then(json => {
-          that.loading = false
+          // sort scores alphabetically
+          json.children[0].scores.sort((a, b) => (a.title > b.title) ? 1 : -1)
           that.catalogue = json.children
+          console.log(json.children[0].scores)
+          that.loading = false
         })
-      },
+      }
     },
     created() {
       this.fetchScores()

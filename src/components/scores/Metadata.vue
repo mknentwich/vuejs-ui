@@ -15,7 +15,12 @@
         <v-icon class="secondary--text"> mdi-information-variant </v-icon>
       </v-col>
       <v-col cols="11" class="text-body-1 primary--text">
-        {{ description }}
+        <div class="font-weight-bold">
+          {{ summary }}
+        </div>
+        <div>
+          {{ description }}
+        </div>
       </v-col>
     </v-row>
     <!-- category (if necessary fetch category string by id)
@@ -67,6 +72,10 @@
       author: {
         type: String,
         default: 'Autor'
+      },
+      summary: {
+        type: String,
+        default: ''
       },
       description: {
         type: String,

@@ -14,19 +14,19 @@
         </v-col>
 
         <v-col cols="12" sm="8" class="primary--text">
-          <div class="text-h6 font-weight-bold pb-4">
+          <!--<div class="text-h6 font-weight-bold pb-4">
             Darf ich mich vorstellen?
-          </div>
+          </div>-->
           <v-img
             justify="left"
             :src="require('@/assets/markusNentwich_komma.svg')"
             height="150"
             width="250"
-            class="mt-n6 ml-n3"
+            class="mt-n2 ml-n3"
             contain
           ></v-img>
           <div class="text-h6">
-            mein Name.  
+            der Mann vor dem Notenblatt <br> und hinter der Posaune.
           </div>
         </v-col>
         
