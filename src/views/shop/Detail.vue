@@ -23,6 +23,7 @@
           <v-col cols="12" class="mb-6">
             <ScoreMetadata
               :author="score.author"
+              :summary="score.summary"
               :description="score.description"
               :category="score.categoryId"
               :difficulty="score.difficulty"

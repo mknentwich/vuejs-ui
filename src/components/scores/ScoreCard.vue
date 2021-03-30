@@ -1,5 +1,5 @@
 <template>
-  <v-card rounded="lg" outlined color="" class="align-stretch box-shadow" width="100%">
+  <v-card rounded="lg" outlined class="d-flex flex-column box-shadow" width="100%" height="100%">
     <v-card-title class="secondaryAccent font-weight-bold primary--text py-3">
       <router-link :to="`score/${score.id}`" class="no-underline">
         {{ score.title }}
@@ -11,7 +11,7 @@
 
     <v-card-text>
       <div class="mb-3">
-        {{ score.description }}
+        {{ score.summary }}
       </div>
       <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold"> für {{ score.groupType }} </v-chip>
       <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold">
@@ -21,7 +21,7 @@
         </span>
       </v-chip>
     </v-card-text>
-
+    <v-spacer></v-spacer>
     <v-card-actions class="mt-0 secondaryAccentLight">
       <v-row no-gutters class="align-center">
         <v-col cols="12" md="auto" class="mx-auto">
@@ -75,14 +75,13 @@
             })
         });
         console.log('metadata', this.cartItemsMetadata)
-      },
+      }
     },
   }
 </script>
 <style scoped>
 .box-shadow {
   box-shadow: 5px 5px 0px #d5d5d5 !important;
-  height: 100%;
 }
 .no-underline {
   text-decoration: none !important;

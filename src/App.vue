@@ -60,14 +60,14 @@
           icon: 'mdi-playlist-music-outline'
         },
         {
-          label: 'Kontakt',
-          path: '/contact',
-          icon: 'mdi-email'
-        },
-        {
           label: 'Biografie',
           path: '/biography',
           icon: 'mdi-card-account-details'
+        },
+        {
+          label: 'Kontakt',
+          path: '/contact',
+          icon: 'mdi-email'
         }
       ],
       footerLinks: [
