@@ -25,7 +25,7 @@
           contain
         ></v-img>
         <div class="text-h6">
-          Musiker, Komponist, Arrangeur, Dirigent und Pädagoge <br> aus Leopolsdorf im Marchfeld.  
+          Musiker, Komponist, Arrangeur, Dirigent und Pädagoge <br> aus Leopoldsdorf im Marchfeld.  
         </div>
       </v-col>
       
