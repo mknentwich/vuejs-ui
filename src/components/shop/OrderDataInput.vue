@@ -283,7 +283,28 @@ import { mapGetters, mapMutations } from 'vuex'
         fetch(process.env.VUE_APP_API_URL + '/meta/states/')
         .then(response => response.json())
         .then(json => {
-          that.states = json
+          // sort states alphabetically except put Germany and Austria to the top
+          var statesTop = []
+          var statesRest = json
+          // find GER and AUT and remove from array
+          json.find(function(value, index) {
+            if (value && value.name === 'Deutschland') {
+              statesTop[0] = json[index]
+              statesRest.splice(index, 1)
+            }
+            if (value && value.name === 'Österreich') {
+              statesTop[1] = json[index]
+              statesRest.splice(index, 1)
+            }
+          });
+          // sort remaining array alphabetically
+          statesRest.sort(function(a, b){
+            if(a.name < b.name) { return -1; }
+            if(a.name > b.name) { return 1; }
+            return 0;
+          })
+          // concatenate two arrays
+          that.states = [].concat(statesTop, statesRest)
         })
       },
       updateOrderDetails: function() {
