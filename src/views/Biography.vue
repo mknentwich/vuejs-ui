@@ -85,7 +85,7 @@
         },
         {
           title: 'Studium',
-          text: '2013 begann er das Diplomstudim Konzertfach Posaune (Klassik) bei Univ.-Prof. Otmar Gaiswinkler, Univ.-Prof Dietmar Küblböck und Erik Hainzl, ein Jahr später folgte das Studium Instrumental- und Gesangspädagogik (IGP Klassik). Beide Studien schloss er 2020 ab. 2015 kam das Studium Jazzposaune bei Leonhard Paul dazu, das 2021 abgeschlossen wurde.'
+          text: '2013 begann er das Diplomstudium Konzertfach Posaune (Klassik) bei Univ.-Prof. Otmar Gaiswinkler, Univ.-Prof Dietmar Küblböck und Erik Hainzl, ein Jahr später folgte das Studium Instrumental- und Gesangspädagogik (IGP Klassik). Beide Studien schloss er 2020 ab. 2015 kam das Studium Jazzposaune bei Leonhard Paul dazu, das 2021 abgeschlossen wurde.'
         },
         {
           title: 'Auftritte',
