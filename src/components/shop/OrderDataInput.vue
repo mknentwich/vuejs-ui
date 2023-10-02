@@ -83,10 +83,10 @@
             <v-col cols="10">
               <v-text-field
                 v-model="orderDetails.identity.telephone"
+                :rules="phoneRules"
                 dense
                 outlined
-                hide-details
-                label="Telefonnummer"
+                label="Telefonnummer (*)"
                 prepend-inner-icon="mdi-phone"
               ></v-text-field>
             </v-col>
@@ -269,6 +269,10 @@ import { mapGetters, mapMutations } from 'vuex'
       emailRules: [
         v => !!v || 'Pflichtfeld',
         v => /.+@.+\..+/.test(v) || 'Bitte gültige E-Mail Adresse eingeben.',
+      ],
+      phoneRules: [
+        v => !!v || 'Pflichtfeld',
+        v => /^(\+[0-9]{2,3}|00[0-9]{2,3}|0)[0-9]{3,50}$/.test(v) || 'Gültige Telefonnummern bestehen nur aus Ziffern und maximal einem \'+\' am Beginn',
       ],
       requiredRule: [
         v => !!v || 'Pflichtfeld',
