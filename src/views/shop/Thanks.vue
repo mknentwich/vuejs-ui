@@ -3,7 +3,7 @@
     <v-row class="align-center">
       <v-spacer></v-spacer>
       <v-col cols="12" sm="3" justify="center" class="d-flex">
-        <v-avatar :size="avatarSize" class="mx-auto hidden-xs-only">
+        <v-avatar :size="avatarSize" class="mx-auto hidden-sm-and-down">
           <v-img
             :src="require('@/assets/nentwich_portrait.jpg')"
             alt="Image of Markus Nentwich"
@@ -36,38 +36,43 @@
     <v-row class="text-center">
       <v-col>
         <v-btn 
-          outlined 
+          variant="outlined" 
           rounded 
-          large 
+          size="large" 
           class="primary--text"
           to="/">
-          <v-icon class="mr-2"> mdi-home </v-icon>
+          <v-icon class="mr-2">mdi-home</v-icon>
           zurück zur Startseite
         </v-btn>
       </v-col>
     </v-row>
-
   </v-sheet>
 </template>
 
 <script>
-  export default {
-    name: 'Thanks',
-    data: () => ({
-    }),
-    computed: {
-      avatarSize: function () {
-        if (this.$vuetify.breakpoint.lgAndUp) {
-          return 250
-        }
-        if (this.$vuetify.breakpoint.mdAndUp) {
-          return 150
-        }
-        if (this.$vuetify.breakpoint.smAndUp) {
-          return '20vw'
-        }
-        return '50vw'
-      },
-    }
+import { useDisplay } from 'vuetify';
+import { computed } from 'vue';
+
+export default {
+  name: 'Thanks',
+  setup() {
+    const { mdAndUp, lgAndUp, smAndUp } = useDisplay();
+    const avatarSize = computed(() => {
+      if (lgAndUp.value) {
+        return 250;
+      }
+      if (mdAndUp.value) {
+        return 150;
+      }
+      if (smAndUp.value) {
+        return '20vw';
+      }
+      return '50vw';
+    });
+    return {
+      avatarSize
+    };
   }
+} 
+
 </script>

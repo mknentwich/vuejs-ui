@@ -4,7 +4,7 @@
     <v-divider v-for="n in 5" v-bind:key="n" class="mb-2"></v-divider>
     
     <div class="mt-n12 primary--text">
-      <h1 :class="{'text-h3 font-weight-bold': $vuetify.breakpoint.mdAndUp, 'text-h5 font-weight-bold': $vuetify.breakpoint.smAndDown}" >
+      <h1 :class="{'text-h3 font-weight-bold': display.mdAndUp, 'text-h5 font-weight-bold': !display.mdAndUp}" >
         {{ title }}
       </h1>
     </div>
@@ -28,14 +28,16 @@
   </v-sheet>
 </template>
 <script>
+  import { useDisplay } from 'vuetify'
   import AddToCartBtn from '@/components/shop/AddToCartBtn.vue'
 
   export default {
     name: 'Header',
     components: { AddToCartBtn },
-    data: () => ({
-      
-    }),
+    setup() {
+      const display = useDisplay()
+      return { display }
+    },
     props: {
       scoreId: {
         type: Number

@@ -1,9 +1,18 @@
 <template>
   <v-card rounded="lg" outlined class="d-flex flex-column box-shadow" width="100%" height="100%">
-    <v-card-title class="secondaryAccent font-weight-bold primary--text py-3">
+    <v-card-title class="secondaryAccent primary--text py-1 text-left">
       <v-row no-gutters>
+        <v-col class="mt-1">
+          <router-link :to="`score/${score.id}/${score.title.replace(/\s+/g, '-').toLowerCase()}`" class="no-underline primary--text text-h5 font-weight-bold"> {{ score.title }} </router-link>
+        </v-col>
         <v-col>
-          <router-link :to="`score/${score.id}/${score.title.replace(/\s+/g, '-').toLowerCase()}`" class="no-underline primary--text"> {{ score.title }} </router-link>
+          <v-chip size="small" color="primary" class="ma-1 font-weight-bold"> für {{ score.groupType }} </v-chip>
+      <v-chip size="small" color="primary" class="ma-1 font-weight-bold">
+        <span class="mr-3"> Schwierigkeit </span>
+        <span v-for="n in 5" v-bind:key="n">
+          <v-icon small :color="n <= score.difficulty ? 'primary' : 'primaryAccent'">mdi-checkbox-blank-circle</v-icon>
+        </span>
+      </v-chip>
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="auto">
@@ -13,21 +22,13 @@
     </v-card-title>
     <v-divider></v-divider>
 
-    <v-card-text>
-      <div class="mb-3">
+    <v-card-text class="pb-0">
         {{ score.summary }}
-      </div>
-      <v-chip size="small" color="primary" class="ma-1 font-weight-bold"> für {{ score.groupType }} </v-chip>
-      <v-chip size="small" color="primary" class="ma-1 font-weight-bold">
-        <span class="mr-3"> Schwierigkeit </span>
-        <span v-for="n in 5" v-bind:key="n">
-          <v-icon small :color="n <= score.difficulty ? 'primary' : 'primaryAccent'">mdi-checkbox-blank-circle</v-icon>
-        </span>
-      </v-chip>
     </v-card-text>
-    <v-spacer></v-spacer>
-    <v-card-actions class="mt-0 secondaryAccentLight">
-      <v-row no-gutters class="align-center">
+    
+    <v-card-actions class="ma-0 secondaryAccentLight">
+      <v-row class="align-center">
+        <v-spacer></v-spacer>
         <v-col cols="12" md="auto" class="mx-auto">
           <span class="px-2 text-h6 primary--text font-weight-black">
             {{ (score.price/100).toLocaleString('de-DE', {minimumFractionDigits: 2}) }} €

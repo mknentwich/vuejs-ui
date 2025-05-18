@@ -4,10 +4,10 @@
     <AppBar :items="navItems" />
 
     <v-main>
-      <v-container>
+      <v-container class="container">
           <v-row no-gutters>
             <v-spacer></v-spacer>
-            <v-col :cols="$vuetify.breakpoint.xs ? 12 : 10" v-if="!$route.meta.hideCart === true">
+            <v-col :cols="isXs ? 12 : 10" v-if="!$route.meta.hideCart === true">
               <v-scale-transition>
               <Cart/>
               </v-scale-transition>
@@ -30,22 +30,18 @@
   import Cart from '@/components/shop/Cart.vue'
   import AppBar from '@/components/AppBar.vue'
   import NavigationDrawer from '@/components/NavigationDrawer.vue'
+  import { useDisplay } from 'vuetify'
 
   export default {
     components: { Cart, Footer, AppBar, NavigationDrawer },
     props: {
       source: String,
     },
-    metaInfo() {
-        return { 
-            title: 'Markus Nentwich',
-            meta: [
-                { name: 'description', content:  'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.'},
-                { name: 'abstract', content:  'Markus Nentwich (*28.12.1994) ist Musiker, Komponist und Arrangeur aus Niederösterreich. Auf dieser Homepage können Sie Noten kaufen und Workshops buchen.'},
-                { name: 'keywords', content:  'Markus Nentwich, Eine letzte Runde, Viera Blech, Polka, Musik, Blasmusik, Noten, Posaune, Webshop, Verlag'},
-                { name: 'robots', content: 'index,follow'} 
-            ]
-        }
+    setup() {
+      const { xs } = useDisplay()
+      return {
+        isXs: xs
+      }
     },
     data: () => ({
       navItems: [
@@ -99,11 +95,14 @@
 	padding: 0px !important;
 }
 .container {
-  max-width: 1400px;
+  max-width: 1300px;
 }
 .box-shadow {
   box-shadow: 5px 5px 0px #d5d5d5 !important;
   height: 100%;
+}
+.primary--text {
+  color: #2E5346 !important;
 }
 </style>
 

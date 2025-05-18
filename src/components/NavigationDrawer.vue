@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
-    v-model="drawerValue"
+    :model-value="drawerValue"
+    @update:model-value="setDrawerValue"
     app
     disable-resize-watcher
     color="primary"
@@ -16,38 +17,32 @@
     <v-divider></v-divider>
 
     <v-list nav>
-      <v-list-item link v-for="item in items" v-bind:key="item.label" :to="item.path">
+      <v-list-item link v-for="(item, index) in items" :key="item.path + '-' + index" :to="item.path">
         <v-list-item-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>{{ item.label }}</v-list-item-title>
-        </v-list-item-content>
+        <v-list-item-title>{{ item.label }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex'
-  export default {
-    name: 'NavigationDrawer',
-    computed: {
-      ...mapState(['drawer']),
-      drawerValue: {
-        get: function () {
-          return this.drawer
-        },
-        set: function (value) {
-          this.setDrawerValue(value)
-        }
-      }
+import { mapState, mapMutations } from 'vuex';
+
+export default {
+  name: 'NavigationDrawer',
+  computed: {
+    ...mapState(['drawer']),
+    drawerValue() {
+      return this.drawer;
     },
-    methods: {
-      ...mapMutations(['setDrawerValue'])
-    },
-    props: {
-      items: Array
-    }
-  }
+  },
+  methods: {
+    ...mapMutations(['setDrawerValue']),
+  },
+  props: {
+    items: Array,
+  },
+};
 </script>
