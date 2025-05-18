@@ -86,10 +86,11 @@
             <v-col cols="10">
               <v-text-field
                 v-model="orderDetails.identity.telephone"
+                :rules="phoneRules"
                 density="compact"
                 variant="outlined"
                 hide-details
-                label="Telefonnummer"
+                label="Telefonnummer (*)"
                 prepend-inner-icon="mdi-phone"
               ></v-text-field>
             </v-col>
@@ -281,6 +282,11 @@ export default {
       v => !!v || 'Pflichtfeld',
     ];
 
+    const phoneRules = [
+        v => !!v || 'Pflichtfeld',
+        v => /^(\+[0-9]{2,3}|00[0-9]{2,3}|0)[0-9]{3,50}$/.test(v) || 'Gültige Telefonnummern bestehen nur aus Ziffern und maximal einem \'+\' am Beginn',
+    ];
+
     const fetchStates = async () => {
       const response = await fetch(process.env.VUE_APP_API_URL + '/meta/states/');
       const json = await response.json();
@@ -336,6 +342,7 @@ export default {
       deliveryAddress,
       emailRules,
       requiredRule,
+      phoneRules,
       validateForm,
       onFormValidityChange
     };

@@ -48,7 +48,7 @@
       </v-col>
       <v-col cols="11" class="text-body-1 primary--text">
         <v-chip small color="secondaryAccent" class="font-weight-bold">
-          <span class="mr-3"> Schwierigkeit </span>
+          <span class="mr-3 text-primary"> Schwierigkeit </span>
           <span v-for="n in 5" v-bind:key="n">
             <v-icon small :color="n <= difficulty ? 'primary' : 'primaryAccent'">mdi-checkbox-blank-circle</v-icon>
           </span>
