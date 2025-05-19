@@ -1,11 +1,15 @@
 <template>
   <v-card rounded="lg" outlined class="d-flex flex-column box-shadow" width="100%" height="100%">
     <v-card-title class="secondaryAccent font-weight-bold primary--text py-3">
-      <router-link :to="`score/${score.id}`" class="no-underline">
-        {{ score.title }}
-      </router-link>
-      <v-spacer></v-spacer>
-      <v-chip small outlined color="primary primary--text font-weight-bold px-6">{{ categoryName }}</v-chip>
+      <v-row no-gutters>
+        <v-col>
+          <router-link :to="`score/${score.id}/${score.title.replace(/\s+/g, '-').toLowerCase()}`" class="no-underline primary--text"> {{ score.title }} </router-link>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col cols="auto">
+          <v-chip size="small" variant="outlined" color="primary primary--text font-weight-bold px-6">{{ categoryName }}</v-chip>
+        </v-col>
+      </v-row>
     </v-card-title>
     <v-divider></v-divider>
 
@@ -13,8 +17,8 @@
       <div class="mb-3">
         {{ score.summary }}
       </div>
-      <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold"> für {{ score.groupType }} </v-chip>
-      <v-chip small color="secondaryAccent" class="ma-1 font-weight-bold">
+      <v-chip size="small" color="primary" class="ma-1 font-weight-bold"> für {{ score.groupType }} </v-chip>
+      <v-chip size="small" color="primary" class="ma-1 font-weight-bold">
         <span class="mr-3"> Schwierigkeit </span>
         <span v-for="n in 5" v-bind:key="n">
           <v-icon small :color="n <= score.difficulty ? 'primary' : 'primaryAccent'">mdi-checkbox-blank-circle</v-icon>
@@ -33,7 +37,7 @@
           <AddToCartBtn :scoreId="score.id"></AddToCartBtn>
         </v-col>
         <v-col cols="12" md="auto" class="py-1 mx-auto">
-          <v-btn rounded x-small depressed class="primaryAccent font-weight-bold" :to="`score/${score.id}`">
+          <v-btn rounded size="small" variant="flat" color="primaryAccent" class="font-weight-bold primary--text" :to="`score/${score.id}/${score.title.replace(/\s+/g, '-').toLowerCase()}`">
             <v-icon left small>mdi-information-variant</v-icon>
             Details
           </v-btn>
@@ -82,8 +86,12 @@
 <style scoped>
 .box-shadow {
   box-shadow: 5px 5px 0px #d5d5d5 !important;
+  border: 1px #d5d5d5 solid;
 }
 .no-underline {
   text-decoration: none !important;
+}
+.primary--text {
+  color: #2E5346 !important;
 }
 </style>

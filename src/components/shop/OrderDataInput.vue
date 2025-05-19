@@ -1,10 +1,10 @@
 <template>
   <div class="px-4">
-    
     <v-form
       ref="form"
       v-model="orderDetailsAreValid"
-      :update="updateOrderDetails()"
+      validate-on="blur"
+      @update:modelValue="onFormValidityChange"
     >
       <v-row dense>
         <!-- NAME -->
@@ -17,8 +17,9 @@
               <v-text-field
                 v-model="orderDetails.identity.salutation"
                 :rules="requiredRule"
-                dense
-                outlined
+                lazy-rules
+                density="compact"
+                variant="outlined"
                 hide-details
                 label="Anrede (*)"
               ></v-text-field>
@@ -29,9 +30,10 @@
               <v-text-field
                 v-model="orderDetails.identity.firstName"
                 :rules="requiredRule"
-                dense
+                lazy-rules
+                density="compact"
                 hide-details
-                outlined
+                variant="outlined"
                 label="Vorname (*)"
               ></v-text-field>
             </v-col>
@@ -39,9 +41,10 @@
               <v-text-field
                 v-model="orderDetails.identity.lastName"
                 :rules="requiredRule"
-                dense
+                lazy-rules
+                density="compact"
                 hide-details
-                outlined
+                variant="outlined"
                 label="Nachname (*)"
               ></v-text-field>
             </v-col>
@@ -56,8 +59,8 @@
             <v-col cols="5">
               <v-text-field
                 v-model="orderDetails.identity.company"
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 hide-details
                 label="Firma / Verein"
               ></v-text-field>
@@ -74,8 +77,8 @@
               <v-text-field
                 v-model="orderDetails.identity.email"
                 :rules="emailRules"
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 label="E-Mail (*)"
                 prepend-inner-icon="mdi-email"
               ></v-text-field>
@@ -83,10 +86,11 @@
             <v-col cols="10">
               <v-text-field
                 v-model="orderDetails.identity.telephone"
-                dense
-                outlined
+                :rules="phoneRules"
+                density="compact"
+                variant="outlined"
                 hide-details
-                label="Telefonnummer"
+                label="Telefonnummer (*)"
                 prepend-inner-icon="mdi-phone"
               ></v-text-field>
             </v-col>
@@ -102,8 +106,8 @@
               <v-text-field
                 v-model="orderDetails.identity.address.street"
                 :rules="requiredRule"
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 hide-details
                 label="Straße (*)"
               ></v-text-field>
@@ -112,8 +116,8 @@
               <v-text-field
                 v-model="orderDetails.identity.address.streetNumber"
                 :rules="requiredRule"
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 hide-details
                 label="Hausnummer (*)"
               ></v-text-field>
@@ -124,8 +128,8 @@
               <v-text-field
                 v-model="orderDetails.identity.address.postCode"
                 :rules="requiredRule"
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 hide-details
                 label="PLZ (*)"
               ></v-text-field>
@@ -134,8 +138,8 @@
               <v-text-field
                 v-model="orderDetails.identity.address.city"
                 :rules="requiredRule"
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 hide-details
                 label="Ort (*)"
               ></v-text-field>
@@ -144,15 +148,15 @@
           <v-row dense>
             <v-col cols="7">
               <v-select
-                dense
-                outlined
+                density="compact"
+                variant="outlined"
                 v-model="orderDetails.identity.address.stateId"
                 :rules="requiredRule"
                 :items="states"
-                item-text="name"
+                item-title="name"
                 item-value="id"
                 label="Land (*)"
-                hide-details=""
+                hide-details
               ></v-select>
             </v-col>
           </v-row>
@@ -175,8 +179,9 @@
               <v-col cols="7">
                 <v-text-field
                   v-model="deliveryAddress.street"
-                  dense
-                  outlined
+                  lazy-rules
+                  density="compact"
+                  variant="outlined"
                   hide-details
                   label="Straße"
                 ></v-text-field>
@@ -184,8 +189,9 @@
               <v-col cols="3">
                 <v-text-field
                   v-model="deliveryAddress.streetNumber"
-                  dense
-                  outlined
+                  lazy-rules
+                  density="compact"
+                  variant="outlined"
                   hide-details
                   label="Hausnummer"
                 ></v-text-field>
@@ -195,8 +201,8 @@
               <v-col cols="3">
                 <v-text-field
                   v-model="deliveryAddress.postCode"
-                  dense
-                  outlined
+                  density="compact"
+                  variant="outlined"
                   hide-details
                   label="PLZ"
                 ></v-text-field>
@@ -204,8 +210,8 @@
               <v-col cols="7">
                 <v-text-field
                   v-model="deliveryAddress.city"
-                  dense
-                  outlined
+                  density="compact"
+                  variant="outlined"
                   hide-details
                   label="Ort"
                 ></v-text-field>
@@ -214,11 +220,11 @@
             <v-row dense>
               <v-col cols="3">
                 <v-select
-                  dense
-                  outlined
+                  density="compact"
+                  variant="outlined"
                   v-model="deliveryAddress.stateId"
                   :items="states"
-                  item-text="name"
+                  item-title="name"
                   item-value="id"
                   label="Land"
                 ></v-select>
@@ -228,99 +234,120 @@
         </v-col>
       </v-row>
     </v-form>
-    
-    <v-divider class="mt-3"></v-divider>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
-  export default {
-    name: 'OrderDataInput',
-    data: () => ({
-      deliveryAddressSameAsInvoiceAddress: true,
-      termsOfServiceChecked: false,
-      states: [],
-      orderDetailsAreValid: true,
-      orderDetails: {
-        identity: {
-          salutation: '',
-          firstName: '',
-          lastName: '',
-          company: '',
-          email: '',
-          telephone: '',
-          address: {
-            city: '',
-            postCode: '',
-            street: '',
-            streetNumber: '',
-            stateId: null
-          }
-        }
-      },
-      deliveryAddress: {
-        city: '',
-        postCode: '',
-        street: '',
-        streetNumber: '',
-        stateId: ''
-      },
-      emailRules: [
-        v => !!v || 'Pflichtfeld',
-        v => /.+@.+\..+/.test(v) || 'Bitte gültige E-Mail Adresse eingeben.',
-      ],
-      requiredRule: [
-        v => !!v || 'Pflichtfeld',
-      ],
-    }),
-    methods: {
-      ...mapGetters(['getCartItemsIdAndQuantity']),
-      ...mapMutations(['setOrderDetails', 'setOptionalDeliveryAddress', 'setOrderDetailsAreValid']),
+import { ref, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 
-      fetchStates: function() {
-        var that = this
-        fetch(process.env.VUE_APP_API_URL + '/meta/states/')
-        .then(response => response.json())
-        .then(json => {
-          // sort states alphabetically except put Germany and Austria to the top
-          var statesTop = []
-          var statesRest = json
-          // find GER and AUT and remove from array
-          json.find(function(value, index) {
-            if (value && value.name === 'Deutschland') {
-              statesTop[0] = json[index]
-              statesRest.splice(index, 1)
-            }
-            if (value && value.name === 'Österreich') {
-              statesTop[1] = json[index]
-              statesRest.splice(index, 1)
-            }
-          });
-          // sort remaining array alphabetically
-          statesRest.sort(function(a, b){
-            if(a.name < b.name) { return -1; }
-            if(a.name > b.name) { return 1; }
-            return 0;
-          })
-          // concatenate two arrays
-          that.states = [].concat(statesTop, statesRest)
-        })
-      },
-      updateOrderDetails: function() {
-        this.setOrderDetailsAreValid(this.orderDetailsAreValid)
-        this.setOrderDetails(this.orderDetails)
-        if (this.deliveryAddressSameAsInvoiceAddress) {
-          this.setOptionalDeliveryAddress()
-        } else {
-          this.setOptionalDeliveryAddress(this.deliveryAddress)
+export default {
+  name: 'OrderDataInput',
+  setup() {
+    const store = useStore();
+    const form = ref(null);
+    const deliveryAddressSameAsInvoiceAddress = ref(true);
+    const termsOfServiceChecked = ref(false);
+    const states = ref([]);
+    const orderDetailsAreValid = ref(false);
+    const orderDetails = ref({
+      identity: {
+        salutation: '',
+        firstName: '',
+        lastName: '',
+        company: '',
+        email: '',
+        telephone: '',
+        address: {
+          city: '',
+          postCode: '',
+          street: '',
+          streetNumber: '',
+          stateId: null
         }
       }
-    },
-    beforeMount() {
-      this.fetchStates()
-    },
+    });
+    const deliveryAddress = ref({
+      city: '',
+      postCode: '',
+      street: '',
+      streetNumber: '',
+      stateId: ''
+    });
+    const emailRules = [
+      v => !!v || 'Pflichtfeld',
+      v => /.+@.+\..+/.test(v) || 'Bitte gültige E-Mail Adresse eingeben.',
+    ];
+    const requiredRule = [
+      v => !!v || 'Pflichtfeld',
+    ];
+
+    const phoneRules = [
+        v => !!v || 'Pflichtfeld',
+        v => /^(\+[0-9]{2,3}|00[0-9]{2,3}|0)[0-9]{3,50}$/.test(v) || 'Gültige Telefonnummern bestehen nur aus Ziffern und maximal einem \'+\' am Beginn',
+    ];
+
+    const fetchStates = async () => {
+      const response = await fetch(process.env.VUE_APP_API_URL + '/meta/states/');
+      const json = await response.json();
+      const statesTop = [];
+      const statesRest = json.filter((value, index) => {
+        if (value.name === 'Deutschland') {
+          statesTop[0] = value;
+          return false;
+        }
+        if (value.name === 'Österreich') {
+          statesTop[1] = value;
+          return false;
+        }
+        return true;
+      });
+      statesRest.sort((a, b) => a.name.localeCompare(b.name));
+      states.value = [...statesTop, ...statesRest];
+    };
+
+    const validateForm = async () => {
+      const { valid } = await form.value.validate();
+      if (valid) {
+        submitForm();
+      }
+    };
+
+    const onFormValidityChange = (isValid) => {
+      if (isValid) {
+        submitForm();
+      }
+    };
+
+    const submitForm = () => {
+      store.commit('setOrderDetailsAreValid', true);
+      store.commit('setOrderDetails', orderDetails.value);
+      if (deliveryAddressSameAsInvoiceAddress.value) {
+        store.commit('setOptionalDeliveryAddress');
+      } else {
+        store.commit('setOptionalDeliveryAddress', deliveryAddress.value);
+      }
+      console.log('Form submitted successfully');
+    };
+
+    onBeforeMount(fetchStates);
+
+    return {
+      form,
+      deliveryAddressSameAsInvoiceAddress,
+      termsOfServiceChecked,
+      states,
+      orderDetailsAreValid,
+      orderDetails,
+      deliveryAddress,
+      emailRules,
+      requiredRule,
+      phoneRules,
+      validateForm,
+      onFormValidityChange
+    };
   }
+};
 </script>
 
 <style scoped>

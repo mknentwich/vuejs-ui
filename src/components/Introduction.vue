@@ -1,5 +1,5 @@
 <template>
-  <v-sheet rounded="lg" color="secondaryAccent" :class="{'pa-6 pt-10': $vuetify.breakpoint.mdAndUp, 'pa-4 pt-2': $vuetify.breakpoint.smAndDown}">
+  <v-sheet rounded="lg" color="secondaryAccent" :class="{'pa-6 pt-10': isMdAndUp, 'pa-4 pt-2': !isMdAndUp}">
     <v-row class="align-center">
       <v-spacer></v-spacer>
       <v-col cols="12" sm="3" justify="center" class="d-flex">
@@ -35,29 +35,37 @@
 </template>
 
 <script>
-import Quicklinks from '@/components/Quicklinks.vue'
+import Quicklinks from '@/components/Quicklinks.vue';
+import { useDisplay } from 'vuetify';
+import { computed } from 'vue';
 
-  export default {
-    name: 'Introduction',
-    components: {
-      Quicklinks
-    },
-    computed: {
-      avatarSize: function () {
-        if (this.$vuetify.breakpoint.lgAndUp) {
-          return 250
-        }
-        if (this.$vuetify.breakpoint.mdAndUp) {
-          return 200
-        }
-        if (this.$vuetify.breakpoint.smAndUp) {
-          return '20vw'
-        }
-        return '45vw'
-      },
-    },
-    data: () => ({
-      
-    }),
-  }
+export default {
+  name: 'Introduction',
+  components: {
+    Quicklinks,
+  },
+  setup() {
+    const { mdAndUp, lgAndUp, smAndUp } = useDisplay();
+
+    const isMdAndUp = mdAndUp;
+
+    const avatarSize = computed(() => {
+      if (lgAndUp.value) {
+        return 250;
+      }
+      if (mdAndUp.value) {
+        return 200;
+      }
+      if (smAndUp.value) {
+        return '20vw';
+      }
+      return '45vw';
+    });
+
+    return {
+      isMdAndUp,
+      avatarSize,
+    };
+  },
+};
 </script>
