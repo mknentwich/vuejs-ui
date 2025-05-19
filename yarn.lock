@@ -6283,7 +6283,7 @@ webpack-merge@^5.7.3:
     flat "^5.0.2"
     wildcard "^2.0.0"
 
-webpack-plugin-vuetify@^2.1.0:
+webpack-plugin-vuetify@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/webpack-plugin-vuetify/-/webpack-plugin-vuetify-3.1.1.tgz#96b2787ea96f598283e4efca6cd2102485dde938"
   integrity sha512-z3e/MtOfqrsKFUGlXe1MepgBkXvmnWDr7L1nFLpl2AHLHMKf1/sL6kjj1mMnEWQ57dKIJb7ejnQsLKK4jnKWow==

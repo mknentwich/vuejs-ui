@@ -1,6 +1,6 @@
 {
   "name": "mknentwich-ui",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -16,7 +16,7 @@
     "vue-router": "^4.5.0",
     "vuetify": "^3.1.0",
     "vuex": "^4.1.0",
-    "webpack-plugin-vuetify": "^2.1.0"
+    "webpack-plugin-vuetify": "^3.1.1"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
