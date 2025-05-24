@@ -31,6 +31,8 @@
   import AppBar from '@/components/AppBar.vue'
   import NavigationDrawer from '@/components/NavigationDrawer.vue'
   import { useDisplay } from 'vuetify'
+  import { useSeoMeta } from '@unhead/vue';
+
 
   export default {
     components: { Cart, Footer, AppBar, NavigationDrawer },
@@ -38,6 +40,10 @@
       source: String,
     },
     setup() {
+      useSeoMeta({
+        title: 'Markus Nentwich',
+        description: 'Musiker, Komponist, Arrangeur, Dirigent und Pädagoge aus Leopoldsdorf im Marchfeld, wohnhaft in Wien.',
+      });
       const { xs } = useDisplay()
       return {
         isXs: xs

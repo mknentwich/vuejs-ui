@@ -85,22 +85,26 @@ export default {
         title: 'Studium',
         text: '2013 begann er das Diplomstudium Konzertfach Posaune (Klassik) bei Univ.-Prof. Otmar Gaiswinkler, Univ.-Prof Dietmar Küblböck und Erik Hainzl, ein Jahr später folgte das Studium Instrumental- und Gesangspädagogik (IGP Klassik). Beide Studien schloss er 2020 ab. 2015 kam das Studium Jazzposaune bei Leonhard Paul dazu, das 2021 abgeschlossen wurde.'
       },
-      {
+      /* {
         title: 'Auftritte',
         text: 'Unzählige Auftritte (mit Powerkryner, Vienna Sound Club, …) in Österreich, Deutschland, Italien, Frankreich, Schweiz, Japan, Dubai, Hongkong, Singapur u.v.m.'
-      },
+      }, */
       {
         title: 'VIERA BLECH',
         text: 'Seit 2020 ist Markus fixes Mitglied bei VIERA BLECH. Die Touren führen ihn regelmäßig nach Österreich, Deutschland, Schweiz, Niederlande, Italien, Frankreich und Kroatien.'
       },
       {
         title: 'Sonstiges',
-        text: 'Neben Unterrichtstätigkeiten an den Musikschulen Deutsch Wagram und Groß-Enzersdorf ist er vor allem als Komponist und Arrangeur für verschiedenste Besetzungen gefragt: ORF Allstars Band, da Blechhauf’n, VIERA BLECH, Kaiser Musikanten, Weinviertler Mährische Musikanten, ... Auch als Aufnahmeleiter oder als Dozent bei Workshops ist er gern gesehen.'
+        text: 'Neben Unterrichtstätigkeiten ist er vor allem als Komponist und Arrangeur für verschiedenste Besetzungen gefragt: ORF Allstars Band, da Blechhauf’n, VIERA BLECH, Kaiser Musikanten, eine kleine dorfmusik, Weinviertler Mährische Musikanten, ... Auch als Aufnahmeleiter oder als Dozent bei Workshops ist er gern gesehen.'
       },
       {
         title: 'Musical',
-        text: '2015 führte ihn eine deutsche Tourproduktion mit dem Musical „Elisabeth“ nach Essen und München. Seit 2022 ist Markus regelmäßig bei den Vereinigten Bühnen Wien als Posaunist und Tubist zu hören. Bisherige Musicals: „Cats“, „Rebecca“, „Der Glöckner von Notre Dame“ und „Jesus Christ Superstar“.'
+        text: '2015 führte ihn eine deutsche Tourproduktion mit dem Musical „Elisabeth“ nach Essen und München. Seit 2022 ist Markus regelmäßig bei den Vereinigten Bühnen Wien als Posaunist und Tubist zu hören. Bisherige Musicals: „Cats“, „Rebecca“, „Der Glöckner von Notre Dame“ und „Jesus Christ Superstar“, „Rock Me Amadeus - das Falco Musical“, „Das Phantom der Oper“.'
       },
+      {
+        title: 'MDW',
+        text: 'Seit 2024 unterrichtet Markus an der Universität für Musik und darstellende Kunst Wien die Fächer Literaturkunde und Arrangement Blasorchester und leitet das Blasorchester der MDW..'
+      }
     ]
   }),
   setup() {

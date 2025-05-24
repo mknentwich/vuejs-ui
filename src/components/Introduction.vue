@@ -25,7 +25,7 @@
           contain
         ></v-img>
         <div class="text-h6">
-          Musiker, Komponist, Arrangeur, Dirigent und Pädagoge <br> aus Leopoldsdorf im Marchfeld.  
+          Musiker, Komponist, Arrangeur, Dirigent und Pädagoge <br> aus Leopoldsdorf im Marchfeld, wohnhaft in Wien.  
         </div>
       </v-col>
       

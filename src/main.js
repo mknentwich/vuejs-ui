@@ -15,6 +15,7 @@ import "@fontsource/roboto/900.css";
 const app = createApp(App);
 const head = createHead();
 
+
 app.use(vuetify);
 app.use(router);
 app.use(store);
