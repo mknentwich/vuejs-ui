@@ -103,7 +103,7 @@ export default {
       },
       {
         title: 'MDW',
-        text: 'Seit 2024 unterrichtet Markus an der Universität für Musik und darstellende Kunst Wien die Fächer Literaturkunde und Arrangement Blasorchester und leitet das Blasorchester der MDW..'
+        text: 'Seit 2024 unterrichtet Markus an der Universität für Musik und darstellende Kunst Wien die Fächer Literaturkunde und Arrangement Blasorchester und leitet das Blasorchester der MDW.'
       }
     ]
   }),

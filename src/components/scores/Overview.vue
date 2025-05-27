@@ -72,7 +72,7 @@
           :key="category.id"
           class="text-center mb-6"
         >
-          <v-divider class="mt-6 mb-4"></v-divider>
+          <v-divider class="mt-10 mb-4"></v-divider>
           <h2 class="primary--text text-h4 font-weight-bold mb-6">{{ category.namePlural }}</h2>
           <v-row v-if="viewMode === 'card'" justify="center">
             <!-- Card view -->
@@ -134,7 +134,7 @@
           :key="group.groupType"
           class="text-center mb-6"
         >
-          <v-divider class="mt-6 mb-4"></v-divider>
+          <v-divider class="mt-10 mb-4"></v-divider>
           <h2 class="primary--text text-h4 font-weight-bold mb-6">{{ group.groupType }}</h2>
           <v-row v-if="viewMode === 'card'" justify="center">
             <!-- Card view -->
@@ -177,7 +177,7 @@
       catalogue: [],
       selectedCategories: [], // Tracks selected categories
       viewMode: 'card', // Tracks the current view mode ('card' or 'list')
-      groupingMode: 'category', // New: 'category' or 'groupType'
+      groupingMode: 'groupType', // New: 'category' or 'groupType'
     }),
     setup() {
       const display = useDisplay()
@@ -194,11 +194,13 @@
         // New computed property to group scores by score.groupType
         const groups = {}
         this.filteredCategories.forEach(category => {
+          // Group scores from category
           category.scores.forEach(score => {
             const key = score.groupType || 'Unknown'
             if (!groups[key]) groups[key] = []
             groups[key].push(score)
           })
+          // Group scores from sub-categories
           category.children.forEach(subcat => {
             subcat.scores.forEach(score => {
               const key = score.groupType || 'Unknown'
@@ -207,10 +209,19 @@
             })
           })
         })
+        // Sort each group's scores alphabetically by title
+        Object.keys(groups).forEach(key => {
+          groups[key].sort((a, b) =>
+            a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+          )
+        })
+        // Return groups sorted by the groupType alphabetically
         return Object.keys(groups).map(key => ({
           groupType: key,
           scores: groups[key],
-        }))
+        })).sort((a, b) =>
+          a.groupType.toLowerCase().localeCompare(b.groupType.toLowerCase())
+        )
       },
     },
     methods: {
@@ -221,10 +232,23 @@
         fetch(process.env.VUE_APP_API_URL + '/catalogue/')
           .then(response => response.json())
           .then(json => {
-            // sort scores alphabetically
-            json.children[0].scores.sort((a, b) =>
-              a.title > b.title ? 1 : -1
-            )
+            // sort scores alphabetically for each category and sub-category
+            json.children.forEach(category => {
+              if (category.scores) {
+                category.scores.sort((a, b) =>
+                  a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+                )
+              }
+              if (category.children) {
+                category.children.forEach(subcat => {
+                  if (subcat.scores) {
+                    subcat.scores.sort((a, b) =>
+                      a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+                    )
+                  }
+                })
+              }
+            })
             that.catalogue = json.children
             that.selectedCategories = json.children.map(category => category.id) // Select all by default
             console.log(json.children[0].scores)
