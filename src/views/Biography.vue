@@ -28,7 +28,11 @@
         </v-col>
       </v-row>
     </v-sheet>
-    <v-timeline :dense="isXsOnly">
+    <v-timeline
+      :side="isXsOnly ? 'end' : undefined"
+      :density="isXsOnly ? 'compact' : 'default'"
+      :hide-opposite="isXsOnly"
+    >
       <v-timeline-item
         v-for="(timelineItem) in timelineItems"
         :key="timelineItem.title"
@@ -41,7 +45,16 @@
         </template>
         <v-card class="secondaryAccent" elevation="0">
           <v-card-text>
-            {{ timelineItem.text }}
+            <div v-if="isXsOnly" class="font-weight-bold primary--text text-h6 mb-2">
+              {{ timelineItem.title }}
+            </div>
+            <p
+              v-for="(paragraph, index) in timelineItem.paragraphs"
+              :key="index"
+              :class="{ 'mb-3': index < timelineItem.paragraphs.length - 1 }"
+            >
+              {{ paragraph }}
+            </p>
           </v-card-text>
         </v-card>
       </v-timeline-item>
@@ -75,42 +88,83 @@ export default {
     timelineItems: [
       {
         title: 'Anfänge',
-        text: 'Seinen ersten Trompeten- und Posaunenunterricht erhielt Markus mit fünf Jahren in der örtlichen Musikschule bei seinem Vater Felix. Daraufhin war er einige Jahre im Unterricht bei Reinhard Stöckl und ein Jahr bei Thomas Zsivkovits. 2010 startete er den Vorbereitungslehrgang an der Universität für Musik und darstellende Kunst Wien bei Prof. Otmar Gaiswinkler.'
+        paragraphs: [
+          'Markus wurde 1994 geboren und kam bereits sehr früh mit Musik in Berührung. Nach ersten Gehversuchen am Klavier erhielt er bei seinem Vater Felix an der örtlichen Musikschule seinen ersten Trompeten- und Posaunenunterricht. In den darauffolgenden Jahren wurde er mehrere Jahre von Reinhard Stöckl und ein Jahr von Thomas Zsivkovits unterrichtet.',
+        ],
       },
       {
         title: 'Schulzeit & danach',
-        text: 'Nach Absolvierung der Matura (Abitur) im Musikgymnasium Wien trat er den Präsenzdienst bei der Gardemusik Wien an. Dort entstanden auch die Powerkryner, für die Markus zahlreiche Arrangements schrieb.'
+        paragraphs: [
+          '2010 begann Markus den Vorbereitungslehrgang an der Universität für Musik und darstellende Kunst Wien bei Prof. Otmar Gaiswinkler. Seine Matura absolvierte er am Musikgymnasium Wien.',
+          'Nach der Schulzeit leistete er 16 Monate Präsenzdienst bei der Gardemusik Wien. In dieser Zeit entstand auch die Band Powerkryner, bei der Markus als musikalischer Leiter und Arrangeur tätig war. Ende 2019 verließ er die Formation.',
+        ],
+      },
+      {
+        title: 'Musikalische Heimat',
+        paragraphs: [
+          'Seine musikalischen Wurzeln liegen im Musikverein Leopoldsdorf, dem Markus seit über 20 Jahren als Mitglied verbunden ist. Von 2013 an war er dort zehn Jahre lang als Kapellmeister tätig und prägte in dieser Funktion das musikalische Vereinsleben.',
+        ],
       },
       {
         title: 'Studium',
-        text: '2013 begann er das Diplomstudium Konzertfach Posaune (Klassik) bei Univ.-Prof. Otmar Gaiswinkler, Univ.-Prof Dietmar Küblböck und Erik Hainzl, ein Jahr später folgte das Studium Instrumental- und Gesangspädagogik (IGP Klassik). Beide Studien schloss er 2020 ab. 2015 kam das Studium Jazzposaune bei Leonhard Paul dazu, das 2021 abgeschlossen wurde.'
-      },
-      /* {
-        title: 'Auftritte',
-        text: 'Unzählige Auftritte (mit Powerkryner, Vienna Sound Club, …) in Österreich, Deutschland, Italien, Frankreich, Schweiz, Japan, Dubai, Hongkong, Singapur u.v.m.'
-      }, */
-      {
-        title: 'VIERA BLECH',
-        text: 'Seit 2020 ist Markus fixes Mitglied bei VIERA BLECH. Die Touren führen ihn regelmäßig nach Österreich, Deutschland, Schweiz, Niederlande, Italien, Frankreich und Kroatien.'
+        paragraphs: [
+          '2013 begann Markus das Diplomstudium Konzertfach Posaune (Klassik) an der Universität für Musik und darstellende Kunst Wien bei Univ.-Prof. Otmar Gaiswinkler, Univ.-Prof. Dietmar Küblböck und Erik Hainzl. 2014 folgte das Studium Instrumental- und Gesangspädagogik (IGP Klassik).',
+          'Beide Studien schloss er 2020 erfolgreich ab. Zusätzlich studierte er ab 2015 Jazzposaune bei Leonhard Paul und schloss dieses Studium 2021 ab.',
+        ],
       },
       {
-        title: 'Sonstiges',
-        text: 'Neben Unterrichtstätigkeiten ist er vor allem als Komponist und Arrangeur für verschiedenste Besetzungen gefragt: ORF Allstars Band, da Blechhauf’n, VIERA BLECH, Kaiser Musikanten, eine kleine dorfmusik, Weinviertler Mährische Musikanten, ... Auch als Aufnahmeleiter oder als Dozent bei Workshops ist er gern gesehen.'
+        title: 'Fixe Ensembles & Bands',
+        paragraphs: [
+          'Von 2020 bis Ende 2026 war Markus fixes Mitglied bei VIERA BLECH. Mit der Formation führten ihn zahlreiche Auftritte und Tourneen durch Österreich, Deutschland, die Schweiz, die Niederlande, Italien und Frankreich sowie nach Kroatien.',
+          'Seit 2024 ist er fixes Mitglied der Thomas Gansch Blasmusik Supergroup.',
+          'Bei den Niederalmer Musikanten begann Markus 2018 zunächst als Aushilfe und Arrangeur. Mittlerweile ist er fixes Mitglied der Formation und dort an Posaune, Tuba und Keyboard zu hören. Darüber hinaus stammen die meisten Arrangements der Gruppe aus seiner Feder.',
+          'Als Substitut gern gesehen bei Wieder, Gansch & Paul, eine kleine dorfmusik, den Weinviertler Mährischen Musikanten, uvm.',
+        ],
+      },
+      {
+        title: 'Blasmusik – Komposition, Arrangement & Aufnahmeleitung',
+        paragraphs: [
+          'Als Arrangeur und Komponist ist Markus in der Blasmusikszene vielseitig tätig. Mittlerweile umfasst sein Repertoire mehr als 100 Arrangements für Blasorchester sowie über 200 Arrangements für Popmusik und Studio-Produktionen.',
+          'Zu seinen Auftraggebern und musikalischen Partnern zählen unter anderem da Blechhauf’n, die Militärmusik Oberösterreich, Rian (Ö3), VIERA BLECH, Pepe Allstar Band, die Kaiser Musikanten, eine kleine dorfmusik, die Weinviertler Mährischen Musikanten, und unzählige weitere Besetzungen.',
+          'Mit „Eine letzte Runde“ und „Marsch der Galaxien“ stammen auch zwei besonders erfolgreiche Blasmusikkompositionen aus seiner Feder. Neuerscheinungen sind regelmäßig im Notenshop zu finden.',
+          'Neben seiner Tätigkeit als Komponist und Arrangeur ist Markus auch als Aufnahmeleiter tätig. In dieser Funktion betreute er unter anderem Produktionen der Kaiser Musikanten, Moritz & Co und Voixbrass sowie Aufnahmen verschiedener Musikvereine.',
+        ],
+      },
+      {
+        title: 'Studio',
+        paragraphs: [
+          'Auch als Studiomusiker ist Markus an Posaune, Tenorhorn und Tuba sehr gefragt – sowohl direkt vor Ort in Studios als auch remote aus dem eigenen Studio zu Hause.',
+          'Häufig übernimmt er dabei nicht nur die instrumentalen Einspielungen, sondern arrangiert auch die passenden Bläserarrangements für die jeweilige Produktion. Zu seinen bisherigen musikalischen Partnern zählen unter anderem das Label Tonherd, die Kastelruther Spatzen, die Juzis, uvm.',
+        ],
+      },
+      {
+        title: 'Unterricht & Workshops',
+        paragraphs: [
+          'Von 2017 bis 2024 unterrichtete Markus an der Musikschule Groß-Enzersdorf, von 2018 bis 2022 zusätzlich an der Musikschule Deutsch-Wagram.',
+          'Von 2024 bis 2026 war er als Dozent für Literaturkunde und Arrangement Blasorchester an der Universität für Musik und darstellende Kunst Wien tätig.',
+          'Darüber hinaus war er als Dozent bei Jungmusikerseminaren und Orchesterwochen tätig.',
+          'Bis heute gibt er regelmäßig Workshops für Blasorchester, kleinere Ensembles und Big Bands in ganz Österreich und Deutschland.',
+        ],
       },
       {
         title: 'Musical',
-        text: '2015 führte ihn eine deutsche Tourproduktion mit dem Musical „Elisabeth“ nach Essen und München. Seit 2022 ist Markus regelmäßig bei den Vereinigten Bühnen Wien als Posaunist und Tubist zu hören. Bisherige Musicals: „Cats“, „Rebecca“, „Der Glöckner von Notre Dame“ und „Jesus Christ Superstar“, „Rock Me Amadeus - das Falco Musical“, „Das Phantom der Oper“.'
+        paragraphs: [
+          '2015 war Markus Teil der deutschen Tourneeproduktion des Musicals „Elisabeth“, die ihn unter anderem nach Essen und München führte.',
+          'Seit 2022 ist er als Substitut regelmäßig als Posaunist und Tubist bei den Vereinigten Bühnen Wien zu hören. Dabei wirkte er an zahlreichen Musicalproduktionen mit, darunter „Cats“, „Rebecca“, „Der Glöckner von Notre Dame“, „Jesus Christ Superstar“, „Rock Me Amadeus – Das Falco Musical“ und „Das Phantom der Oper“.',
+        ],
       },
       {
-        title: 'MDW',
-        text: 'Seit 2024 unterrichtet Markus an der Universität für Musik und darstellende Kunst Wien die Fächer Literaturkunde und Arrangement Blasorchester und leitet das Blasorchester der MDW.'
-      }
+        title: 'Tanzkapelle Kokomo',
+        paragraphs: [
+          '2026 gründete Markus die Tanzkapelle Kokomo. Bereits kurz nach dem Start sorgten die ersten Veröffentlichungen auf Instagram und Facebook für große Aufmerksamkeit und zahlreiche Klicks.',
+        ],
+      },
     ]
   }),
   setup() {
-    const { xsOnly, mdAndUp, lgAndUp, smAndUp } = useDisplay();
+    const { xs, mdAndUp, lgAndUp, smAndUp } = useDisplay();
 
-    const isXsOnly = xsOnly;
+    const isXsOnly = xs;
 
     const avatarSize = computed(() => {
       if (lgAndUp.value) {
