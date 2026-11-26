@@ -1,6 +1,6 @@
 <template>
-  <v-row no-gutters :class="{'pa-6': $vuetify.breakpoint.mdAndUp, 'pa-2': $vuetify.breakpoint.smAndDown}">
-   <v-col cols="12" md="4" class="pa-4" v-for="(link, i) in links" v-bind:key="i">
+  <v-row no-gutters :class="isMdAndUp.value ? 'pa-6' : 'pa-2'">
+    <v-col cols="12" md="4" class="pa-4" v-for="(link, i) in links" v-bind:key="i">
       <v-hover>
         <template v-slot="{ hover }">
           <v-card @click="goTo(link.to)" rounded="lg" flat color="secondaryAccentLight" :class="hover ? 'box-shadow-hover' : 'box-shadow'">
@@ -32,34 +32,41 @@
 </template>
 
 <script>
-  export default {
-    name: 'Quicklinks',
+import { useDisplay } from 'vuetify';
 
-    data: () => ({
-      links: [
-        {
-          icon: 'mdi-card-account-details-outline',
-          text: 'Mehr über mich',
-          to: '/biography',
-        },
-        {
-          img: '@/assets/nentwichVerlag_logos_color.svg',
-          text: 'Noten bestellen',
-          to: '/shop'
-        },
-        {
-          icon: 'mdi-message-text-outline',
-          text: 'Kontakt aufnehmen',
-          to: '/contact'
-        }
-      ]
-    }),
-    methods: {
-      goTo: function (componentName) {
-        this.$router.push(componentName)
+export default {
+  name: 'Quicklinks',
+  setup() {
+    const { mdAndUp } = useDisplay();
+    return {
+      isMdAndUp: mdAndUp,
+    };
+  },
+  data: () => ({
+    links: [
+      {
+        icon: 'mdi-card-account-details-outline',
+        text: 'Mehr über mich',
+        to: '/biography',
+      },
+      {
+        img: '@/assets/nentwichVerlag_logos_color.svg',
+        text: 'Noten bestellen',
+        to: '/shop'
+      },
+      {
+        icon: 'mdi-message-text-outline',
+        text: 'Kontakt aufnehmen',
+        to: '/contact'
       }
-    },
-  }
+    ]
+  }),
+  methods: {
+    goTo: function (componentName) {
+      this.$router.push(componentName)
+    }
+  },
+};
 </script>
 
 <style scoped>

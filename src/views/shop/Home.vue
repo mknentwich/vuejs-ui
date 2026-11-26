@@ -14,7 +14,7 @@
           </v-col>
           <v-col cols="auto">
             <div class="primary--text">
-              <h1 :class="{'text-h4 font-weight-bold mb-3': $vuetify.breakpoint.mdAndUp, 'text-h5 font-weight-bold': $vuetify.breakpoint.smAndDown}">
+              <h1 :class="isMdAndUp ? 'text-h4 font-weight-bold mb-3' : 'text-h5 font-weight-bold'">
                 Noten bestellen
               </h1>
             </div>
@@ -23,19 +23,28 @@
       </v-sheet>
     </v-col>
     <v-col cols="12">
-      <Overview/>
+      <Overview />
     </v-col>
   </v-row>
 </template>
 
 <script>
-// @ is an alias to /src
-import Overview from '@/components/scores/Overview.vue'
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import Overview from '@/components/scores/Overview.vue';
 
 export default {
   name: 'ShopHome',
   components: {
-    Overview
-  }
-}
+    Overview,
+  },
+  setup() {
+    const store = useStore();
+    const isMdAndUp = computed(() => store.getters['display/mdAndUp']);
+
+    return {
+      isMdAndUp,
+    };
+  },
+};
 </script>

@@ -14,17 +14,17 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-expansion-panels accordion focusable class="mb-3">
+      <v-expansion-panels variant="accordion" class="mb-3">
         <v-expansion-panel
-          v-for="(item,i) in terms"
+          v-for="(item, i) in terms"
           :key="i"
-          
         >
-          <v-expansion-panel-header class="font-weight-bold primary--text text-h6">{{ item.title }}</v-expansion-panel-header>
-          <v-expansion-panel-content class="text-body-1">
-            <div class="pa-6" v-html="item.body">
-            </div>
-          </v-expansion-panel-content>
+          <template v-slot:title>
+            <span class="text-h6 font-weight-bold primary--text">{{ item.title }}</span>
+          </template>
+          <template v-slot:text>
+            <div v-html="item.body" class="px-4"></div>
+          </template>
         </v-expansion-panel>
       </v-expansion-panels>
     </v-row>

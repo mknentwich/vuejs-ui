@@ -1,9 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex';
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+const store = createStore({
   state: {
     drawer: false,
     cartItems: [],
@@ -43,31 +40,31 @@ export default new Vuex.Store({
     addToCart: function(state, submittedCartItem) {
       if (!state.cartItems.filter(item => item.id === submittedCartItem.id).length) {
         // if item is not yet in cart, add new line item
-        submittedCartItem.quantity = 1
-        state.cartItems.push(submittedCartItem)
+        submittedCartItem.quantity = 1;
+        state.cartItems.push(submittedCartItem);
       } else {
         // if item already is in cart, increase quantity by one
-        let cartItemRef = state.cartItems.filter(item => item.id === submittedCartItem.id)
-        Vue.set(cartItemRef[0], 'quantity', cartItemRef[0].quantity + 1)
-      } 
+        let cartItemRef = state.cartItems.filter(item => item.id === submittedCartItem.id);
+        cartItemRef[0].quantity += 1; // Direct assignment
+      }
     },
     incrementQuantityOfCartItem: function(state, id) {
-      let cartItemRef = state.cartItems.filter(item => item.id === id)
-      Vue.set(cartItemRef[0], 'quantity', cartItemRef[0].quantity + 1)
+      let cartItemRef = state.cartItems.filter(item => item.id === id);
+      cartItemRef[0].quantity += 1; // Direct assignment
     },
     decrementQuantityOrRemoveCartItem: function(state, id) {
       // check if item is in cart
-      let index = state.cartItems.findIndex(item => item.id === id)
+      let index = state.cartItems.findIndex(item => item.id === id);
 
       if (index !== -1) {
-        let quantity = state.cartItems[index].quantity
-        
+        let quantity = state.cartItems[index].quantity;
+
         if (quantity > 1) {
-          // if item quantity is > 1, decrease quanitity by one
-          Vue.set(state.cartItems[index], 'quantity', quantity - 1)
+          // if item quantity is > 1, decrease quantity by one
+          state.cartItems[index].quantity -= 1; // Direct assignment
         } else {
           // else remove item entirely
-          state.cartItems.splice(index ,1)
+          state.cartItems.splice(index, 1);
         }
       }
     },
@@ -95,4 +92,6 @@ export default new Vuex.Store({
   actions: {
 
   }
-})
+});
+
+export default store;
